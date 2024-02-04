@@ -7,7 +7,7 @@ import Product from "../components/Product.js";
 const HomeScreen = () =>{
     return(<>
     
-      <h1>Lastest Products:</h1>
+      <h1 style={{color:'#2F4F4F'}}>Lastest Products:</h1>
       <Container>
       <Row>
       {products.map((product)=>(

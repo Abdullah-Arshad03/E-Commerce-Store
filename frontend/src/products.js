@@ -8,6 +8,7 @@ const products = [
         category : 'Electronis',
         price : 89.99,
         rating : 2.5 ,
+        countInStock : 0,
         numReviews : 12,
     },
     {
@@ -19,6 +20,7 @@ const products = [
         category : 'Electronis',
         price : 89.99,
         rating : 4.5 ,
+        countInStock : 3,
         numReviews : 12,
     },
     {
@@ -30,6 +32,7 @@ const products = [
         category : 'Electronis',
         price : 89.99,
         rating : 1.5 ,
+        countInStock : 0,
         numReviews : 12,
     },
     {
@@ -41,6 +44,7 @@ const products = [
         category : 'Electronis',
         price : 89.99,
         rating : 3.5 ,
+        countInStock : 7,
         numReviews : 50,
     }
 ]

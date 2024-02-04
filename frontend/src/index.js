@@ -7,7 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import HomeScreen from './screens/HomeScreen';
-import ProductScreen from './components/ProductScreen';
+import ProductScreen from './screens/ProductScreen';
 
 
 const router = createBrowserRouter(
