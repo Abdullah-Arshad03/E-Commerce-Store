@@ -11,9 +11,11 @@ const HomeScreen = () =>{
       <Container>
       <Row>
       {products.map((product)=>(
-        <Col sm={12} md={6} lg={4} xl={3}>
+       
+        <Col sm={12} md={6} lg={4} xl={3} style={{marginBottom:'20px'}}>
              <Product product={product}/>
         </Col>
+      
       ))}
       </Row>
       </Container>

@@ -2,29 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/styles/index.css'; 
 import './assets/styles/bootstrap.custom.css'
-import { createBrowserRouter , createRoutesFromElements, Route , Router , RouterProvider  } from 'react-router-dom'
+import {createBrowserRouter , Route , createRoutesFromElements, RouterProvider} from 'react-router-dom'
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import HomeScreen from './screens/HomeScreen';
+import ProductScreen from './components/ProductScreen';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App></App>}> // this Route, takes an element of an entire app
+    <Route path='/' element={<App></App>}> 
 
-    // that true index mean that if we are just on / only homescreen should be rendered strictly, no other clash with any other route
-      <Route index={true} path='/'  element={<HomeScreen></HomeScreen>}/>
+    <Route index={true} path='/' element={<HomeScreen/>}/>
+    <Route  path='/product/:id' element={<ProductScreen/>}/>
 
 
     </Route>
-
   )
 )
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+   <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );
 

@@ -7,7 +7,11 @@ main {
 }
 
 .rating svg {
-  color: #f8e825;
+  /* color: lightseagreen; */
+  /* color: #FDCC0D; */
+  color: #FF9529;
+  /* color: black; */
+
 }
 
 .rating-text {

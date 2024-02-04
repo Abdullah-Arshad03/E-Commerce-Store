@@ -6,25 +6,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
+import Rating from "./Rating";
+
 
 const Product = ({ product }) => {
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card sx={{ maxWidth: 345  }} >
         <Link to={`/product/${product._id}`}>
           <CardMedia
-            sx={{ height: 160 }}
+            sx={{ height: 200 }}
             image={product.image}
             title="green iguana"
           />
         </Link>
         <CardContent>
-          <Link to={`/product/${product._id}`} style={{textDecorationLine: 'none'}}>
+          <Link to={`/product/${product._id}`} style={{textDecorationColor:'gray'}}>
             <Typography
               gutterBottom
               variant="h5"
               component="div"
               color="text.secondary"
+              className="product-title"
             >
               {product.name}
             </Typography>
@@ -32,9 +35,12 @@ const Product = ({ product }) => {
           <Typography variant="h5" color="text.dark">
             ${product.price}
           </Typography>
+          <Typography variant="div" >
+           <Rating value={product.rating} text={product.numReviews}/>
+          </Typography>
         </CardContent>
 
-        <CardActions>
+        {/* <CardActions>
           <Button
             size="small"
             style={{ borderColor: "gray" }}
@@ -49,7 +55,7 @@ const Product = ({ product }) => {
           >
             Add to Cart
           </Button>
-        </CardActions>
+        </CardActions> */}
       </Card>
     </>
   );
