@@ -1,0 +1,15 @@
+{
+  "name": "e-commerce-store",
+  "version": "1.0.0",
+  "description": "Developing RESTApi for my E-commerce web Application",
+  "main": "app.js",
+  "start": "nodemon app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Abdullah Bin Arshad",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
