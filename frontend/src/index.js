@@ -10,11 +10,11 @@ import HomeScreen from './screens/HomeScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<App></App>}> // that takes an element of an entire aap
+    <Route path='/' element={<App></App>}> // this Route, takes an element of an entire app
 
     // that true index mean that if we are just on / only homescreen should be rendered strictly, no other clash with any other route
       <Route index={true} path='/'  element={<HomeScreen></HomeScreen>}/>
-      
+
 
     </Route>
 
@@ -24,7 +24,7 @@ const router = createBrowserRouter(
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}></RouterProvider>
   </React.StrictMode>
 );
 

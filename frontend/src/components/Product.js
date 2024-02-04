@@ -11,32 +11,35 @@ const Product = ({ product }) => {
   return (
     <>
       <Card sx={{ maxWidth: 345 }}>
-        
-        <CardMedia
-          sx={{ height: 160 }}
-          image={product.image}
-          title="green iguana"
-        />
+        <Link to={`/product/${product._id}`}>
+          <CardMedia
+            sx={{ height: 160 }}
+            image={product.image}
+            title="green iguana"
+          />
+        </Link>
         <CardContent>
-          <Typography
-            gutterBottom
-            variant="h5"
-            component="div"
-            color="text.secondary"
-          >
-            {product.name}
-          </Typography>
+          <Link to={`/product/${product._id}`} style={{textDecorationLine: 'none'}}>
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              color="text.secondary"
+            >
+              {product.name}
+            </Typography>
+          </Link>
           <Typography variant="h5" color="text.dark">
             ${product.price}
           </Typography>
         </CardContent>
+
         <CardActions>
           <Button
             size="small"
             style={{ borderColor: "gray" }}
             variant="outlined"
           >
-     
             Buy Now
           </Button>
           <Button
