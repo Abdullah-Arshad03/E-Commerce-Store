@@ -6,9 +6,10 @@ import Product from "../components/Product.js";
 
 const HomeScreen = () =>{
     return(<>
+    <Container>
     
       <h1 style={{color:'#2F4F4F'}}>Lastest Products:</h1>
-      <Container>
+
       <Row>
       {products.map((product)=>(
        
@@ -18,8 +19,8 @@ const HomeScreen = () =>{
       
       ))}
       </Row>
+  
       </Container>
-    
       
     </>)
 }
