@@ -1,10 +1,31 @@
 import React from "react";
 import { Row , Col} from "react-bootstrap";
 import { Container } from "react-bootstrap";
-import {products} from '../products.js'
 import Product from "../components/Product.js";
+import axios, { AxiosHeaders } from 'axios'
+// import { products } from "../products.js";
+import { useEffect , useState } from "react";
 
 const HomeScreen = () =>{
+   const [products , setProducts]= useState([])
+
+
+  useEffect(()=>{
+
+    axios.get('http://localhost:8000/api/products').then((res)=>{
+      
+      setProducts(res.data.products)
+ 
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+
+
+
+   
+ 
+  },[])
     return(<>
     <Container>
     
