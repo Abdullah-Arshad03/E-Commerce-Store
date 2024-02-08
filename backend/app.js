@@ -19,10 +19,15 @@ app.use((req, res , next)=>{
 app.use('/api',prodRoutes)
 
 try{
+
+    
+
 const connection = async () =>{ 
   const con = await  mongoose.connect(process.env.MONGO_URI)
   console.log('Mongoose! connected')
 }
+
+
 connection()
 app.listen(port, ()=>{
     console.log(`Server is running on the port ${port}`)
