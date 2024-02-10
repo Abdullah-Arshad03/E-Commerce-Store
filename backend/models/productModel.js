@@ -43,6 +43,7 @@ const productSchema = new Schema({
         type : String, 
         required : true
     },
+
     brand : {
         type : String,
         required: true 
@@ -51,7 +52,12 @@ const productSchema = new Schema({
         type : String,
         required: true 
     },
-
+    price : {
+        type : Number,
+        required : true,
+        default: 0.0
+    }
+    ,
     reviews : [reviewSchema]
     ,
     rating : {
