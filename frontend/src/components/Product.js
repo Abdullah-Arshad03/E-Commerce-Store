@@ -13,7 +13,7 @@ const Product = ({ product }) => {
   return (
     <>
       <Card sx={{ maxWidth: 345  }} >
-        <Link to={`/product/${product._id}`}>
+        <Link to={`/products/${product._id}`}>
           <CardMedia
             sx={{ height: 200 }}
             image={product.image}
@@ -21,7 +21,7 @@ const Product = ({ product }) => {
           />
         </Link>
         <CardContent>
-          <Link to={`/product/${product._id}`} style={{textDecorationColor:'gray'}}>
+          <Link to={`/products/${product._id}`} style={{textDecorationColor:'gray'}}>
             <Typography
               gutterBottom
               variant="h5"

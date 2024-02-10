@@ -16,7 +16,8 @@ const ProductScreen = () => {
 
       try{
      const getProduct = async ()=>{ 
-   const res = await axios.get(`http://localhost:8000/api/product/${id}`)
+   const res = await axios.get(`http://localhost:8000/api/products/${id}`)
+   console.log(res)
    setProduct(res.data.product)
    // console.log(res.data.product)
    }
