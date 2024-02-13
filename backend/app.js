@@ -34,9 +34,9 @@ app.use((error,req,res,next)=>{
 
 const connection = async () => {
   try {
-    // await mongoose.connect(process.env.MONGO_URI);
-   const con = await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
-    console.log("Mongoose! connected");
+    await mongoose.connect(process.env.MONGO_URI);
+  //  const con = await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
+    console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");
   }

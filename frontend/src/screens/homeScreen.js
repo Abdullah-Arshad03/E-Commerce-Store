@@ -28,7 +28,8 @@ const HomeScreen = () => {
             <h1 style={{ color: "#2F4F4F" }}>Lastest Products:</h1>
 
             <Row>
-              {data.products.map((product) => (
+              {data.
+              products.map((product) => (
                 <Col
                   sm={12}
                   md={6}
