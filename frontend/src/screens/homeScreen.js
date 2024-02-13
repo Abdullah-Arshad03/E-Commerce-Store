@@ -1,49 +1,50 @@
 import React from "react";
-import { Row , Col} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Product from "../components/Product.js";
-import axios, { AxiosHeaders } from 'axios'
-// import { products } from "../products.js";
-import { useEffect , useState } from "react";
+import { useGetProductsQuery } from "../slices/productApiSlice.js";
+import { useState , useEffect} from "react";
 
-const HomeScreen = () =>{
-   const [products , setProducts]= useState([])
+const HomeScreen = () => {
 
-
-  useEffect(()=>{
-
-    axios.get('http://localhost:8000/api/products').then((res)=>{
-      
-      setProducts(res.data.products)
- 
-    }).catch((err)=>{
-      console.log(err)
-    })
-
-
-
-
-   
- 
-  },[])
-    return(<>
-    <Container>
-    
-      <h1 style={{color:'#2F4F4F'}}>Lastest Products:</h1>
-
-      <Row>
-      {products.map((product)=>(
-       
-        <Col sm={12} md={6} lg={4} xl={3} style={{marginBottom:'20px'}}>
-             <Product product={product}/>
-        </Col>
-      
-      ))}
-      </Row>
   
-      </Container>
-      
-    </>)
-}
 
-export default HomeScreen
+  const { data , isLoading, error } = useGetProductsQuery();
+
+
+
+  return (
+    <>
+      <Container>
+        {isLoading ? (
+          <>
+         
+            <h2>Loading...</h2>
+          </>
+        ) : error ? (
+          <div>{error?.data?.message || error.error}</div>
+        ) : (
+          <>
+            <h1 style={{ color: "#2F4F4F" }}>Lastest Products:</h1>
+
+            <Row>
+              {data.products.map((product) => (
+                <Col
+                  sm={12}
+                  md={6}
+                  lg={4}
+                  xl={3}
+                  style={{ marginBottom: "20px" }}
+                >
+                  <Product product={product} />
+                </Col>
+              ))}
+            </Row>
+          </>
+        )}
+      </Container>
+    </>
+  );
+};
+
+export default HomeScreen;
