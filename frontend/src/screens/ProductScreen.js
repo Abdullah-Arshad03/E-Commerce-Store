@@ -13,7 +13,7 @@ import { Button } from "@mui/material";
 import Rating from "../components/Rating";
 import { Link } from "react-router-dom";
 import { useGetProductDetailsQuery } from "../slices/productApiSlice";
-import { useState } from "react";
+import Loader from "../components/Loader";
 
 const ProductScreen = () => {
   const { id } = useParams();
@@ -28,7 +28,12 @@ const ProductScreen = () => {
     <>
       {isLoading ? (
         <>
-          <h1>Loading...</h1>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ minHeight: "60vh" }} 
+          >
+            <Loader />
+          </div>
         </>
       ) : error ? (
         <>

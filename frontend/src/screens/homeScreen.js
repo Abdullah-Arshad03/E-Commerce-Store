@@ -3,7 +3,7 @@ import { Row, Col } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Product from "../components/Product.js";
 import { useGetProductsQuery } from "../slices/productApiSlice.js";
-import { useState , useEffect} from "react";
+import Loader from "../components/Loader.js";
 
 const HomeScreen = () => {
 
@@ -18,8 +18,14 @@ const HomeScreen = () => {
       <Container>
         {isLoading ? (
           <>
-         
-            <h2>Loading...</h2>
+          <Container>
+          <div
+            className="d-flex justify-content-center align-items-center"
+            style={{ minHeight: "60vh" }} 
+          >
+            <Loader />
+          </div>
+            </Container>
           </>
         ) : error ? (
           <div>{error?.data?.message || error.error}</div>
