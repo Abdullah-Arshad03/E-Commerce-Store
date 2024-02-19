@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { updateCart } from "../utils/cartUtils";
 
 // our items gonna be stored in the local storage so that when we leave the site we come back, and items should be in the cart
 
 const initialState = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : {cartItems : []}
 
 
-const addDecimals = (num) =>{
-    return( Math.round(num * 100)/100 ).toFixed(2)
-}
- 
+
 
 export const cartSlice = createSlice({
     name: 'cart',
@@ -23,23 +21,17 @@ export const cartSlice = createSlice({
             if(!existItem){
                 state.cartItems = [...state.cartItems , item ]
             }
-
-            // calculate the ItemsPrice
-
-            state.itemsPrice = addDecimals( state.cartItems.reduce((accumulator, item)=>{
-                return accumulator + item.price * item.qty
-            }, 0))
-
-            console.log(' this is the price of the items : ' , state.itemsPrice)
-
-
-            // calculate the shippingPrice
             
-            // calculate the taxPrice
-            // calculate the totalPrice
-
+            updateCart(state)
+         
         }
     }
 })
 
 
+// we have to export the addToCart reducer function as an action
+
+
+// every function we created inside the reducer we have to export that function as an action separately 
+
+export const { addToCart } = cartSlice.actions

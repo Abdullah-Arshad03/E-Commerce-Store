@@ -5,7 +5,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
-const prodRoutes = require("./routes/products");
+const prodRoutes = require("./routes/productsRoutes");
 
 // handling the cors errors
 
@@ -34,8 +34,8 @@ app.use((error,req,res,next)=>{
 
 const connection = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-  //  const con = await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
+    // await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
     console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");
