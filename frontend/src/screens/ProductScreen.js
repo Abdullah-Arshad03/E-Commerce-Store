@@ -11,6 +11,7 @@ import {
   FormControl,
 } from "react-bootstrap";
 import { useDispatch} from "react-redux";
+import Message from "../components/Message";
 import { Button } from "@mui/material";
 import Rating from "../components/Rating";
 import { Link } from "react-router-dom";
@@ -51,7 +52,7 @@ const ProductScreen = () => {
         </>
       ) : error ? (
         <>
-          <div>{error?.data?.message || error.message}</div>
+        <Message variant='danger'>{error?.data?.message || error.error}</Message>
         </>
       ) : (
         <>

@@ -9,15 +9,26 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import HomeScreen from './screens/HomeScreen';
+import CartScreen from './screens/CartScreen';
 import ProductScreen from './screens/ProductScreen';
 
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App></App>}> 
+
     <Route index={true} path='/' element={<HomeScreen/>}/>
-    <Route  path='/products/:id' element={<ProductScreen/>}/>
+
+    <Route path='/products/:id' element={<ProductScreen/>}/>
+
+    <Route path='/cart' element={<CartScreen/>}/>
+
     </Route>
+
+  
+
+  
+    
   )
 )
 
