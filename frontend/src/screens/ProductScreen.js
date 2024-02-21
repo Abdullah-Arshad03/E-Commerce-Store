@@ -35,7 +35,9 @@ const ProductScreen = () => {
   const navigate = useNavigate()
 
   const addToCartHandler = () =>{
-    dispatch(addToCart({...data.product , qty}))
+    console.log("clicked value", qty)
+ 
+    dispatch(addToCart({...data.product , qty : Number(qty)  }))
     navigate('/cart')
   }
 
@@ -117,8 +119,10 @@ const ProductScreen = () => {
                     <Row>
                       <Col>Qty : </Col>
                       <Col>
-                      <FormControl as='select' value={qty} onChange={((e) =>{
-                        setQty(e.target.value)
+                      <FormControl as='select'  onChange={((e) =>{
+                        const quantity = e.target.value
+                        console.log('this is the skldjf' , quantity)
+                        setQty(quantity)
                       })}>
 
                         {
