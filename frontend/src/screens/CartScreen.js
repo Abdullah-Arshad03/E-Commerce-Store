@@ -14,7 +14,7 @@ import Message from "../components/Message";
 import { useSelector, useDispatch } from "react-redux";
 import { FaTrash } from "react-icons/fa";
 import { useState } from "react";
-import { addToCart } from "../slices/cartSlice";
+import { addToCart , removeFromCart } from "../slices/cartSlice";
 
 const CartScreen = () => {
   const navigate = useNavigate();
@@ -26,18 +26,24 @@ const CartScreen = () => {
   const addtoCartHandler = async (product , qty) => {
     dispatch(addToCart({...product , qty : qty}))
   }
+
+  const removeFromCartHandler = async ( prodId)=>{
+        dispatch(removeFromCart(prodId))
+  }
   return (
     <>
       <Row>
         <Col md={8}>
-          <h1 style={{ marginBottom: "20px" }}>Shopping Cart</h1>
+          <h1 style={{ marginBottom: "25px" }}>Shopping Cart</h1>
+
 
           {cartItems.length === 0 ? (
             <Message>
-              Your Cart is Empty <Link to="/">Go Back</Link>
+              Your Cart is Empty <Link to="/" style={{color:'black' , textDecoration:'none' , textDecorationLine:'underline'}}>Go Back</Link>
             </Message>
           ) : (
             <ListGroup variant="flush">
+
               {cartItems.map((item) => (
                 <ListGroupItem key={item._id}>
                   <Row>
@@ -79,8 +85,10 @@ const CartScreen = () => {
                       </FormControl>
                     </Col>
                     <Col md={2}>
-                      <Button type="button" variant="light">
-                        <FaTrash> </FaTrash>
+                      <Button type="button" variant="light" onClick={()=>{
+                        removeFromCartHandler( item._id)
+                      }}>
+                        <FaTrash > </FaTrash>
                       </Button>
                     </Col>
                   </Row>
@@ -90,7 +98,7 @@ const CartScreen = () => {
           )}
         </Col>
         <Col md={4}>
-          <Card>
+          <Card style={{marginTop: '10px'}}>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <h2>
