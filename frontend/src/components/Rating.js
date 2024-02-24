@@ -15,6 +15,7 @@ const Rating = ({ value, text }) => {
             <FaRegStar />
           )}
         </span>
+
         <span>
           {value >= 2 ? (
             <FaStar />
@@ -24,6 +25,7 @@ const Rating = ({ value, text }) => {
             <FaRegStar />
           )}
         </span>
+
         <span>
           {value >= 3 ? (
             <FaStar />
@@ -33,6 +35,7 @@ const Rating = ({ value, text }) => {
             <FaRegStar />
           )}
         </span>
+
         <span>
           {value >= 4 ? (
             <FaStar />
@@ -42,6 +45,7 @@ const Rating = ({ value, text }) => {
             <FaRegStar />
           )}
         </span>
+
         <span>
           {value >= 5 ? (
             <FaStar />
@@ -51,6 +55,7 @@ const Rating = ({ value, text }) => {
             <FaRegStar />
           )}
         </span>
+        
         <span className="rating-text">({text ? (<>{text}<span>reviews</span></>) : (<><p>no rating</p></>)})</span>
       </div>
    

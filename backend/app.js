@@ -6,7 +6,8 @@ dotenv.config();
 const app = express();
 const port = process.env.PORT || 5000;
 const prodRoutes = require("./routes/productsRoutes");
-
+const authRoutes = require('./routes/authRoutes')
+const userRoutes = require('./routes/userRoutes')
 // handling the cors errors
 
 app.use((req, res, next) => {
@@ -17,6 +18,8 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/products", prodRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api/users' , userRoutes);
 
 
 app.use((error,req,res,next)=>{

@@ -30,6 +30,10 @@ const CartScreen = () => {
   const removeFromCartHandler = async ( prodId)=>{
         dispatch(removeFromCart(prodId))
   }
+
+  const checkOutHandler = () =>{
+     navigate('/login?redirect=/shipping')
+  }
   return (
     <>
       <Row>
@@ -116,7 +120,10 @@ const CartScreen = () => {
               <ListGroup.Item>
                 <Button type="button"
                     className="btn btn-dark"
-                    disabled={cartItems.length === 0} >
+                    disabled={cartItems.length === 0} 
+                    onClick={checkOutHandler}
+                    >
+                      
                         Proceed to Checkout
                 </Button>
 
