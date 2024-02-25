@@ -10,12 +10,15 @@ exports.loginUser = async(req, res , next) =>{
 
     try {
         const user = await User.findOne({email : email})
+        const Pass = await user.matchPassword(password)
+        console.log(Pass)
 
         if (!user){
             const error  = new Error('Invalid Email or Password')
             error.statusCode = 401 // unauthorized status
             throw error
         }
+        
 
         res.status(200).json({
             _id : user._id,
