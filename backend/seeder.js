@@ -29,7 +29,7 @@ const importData = async() =>{
        const insertedProducts =   await Product.insertMany(sampleProducts)
 
        console.log('these are the inserted products : ',insertedProducts)
-console.log('data inserted'.green.inverse)
+       console.log('data inserted'.green.inverse)
 
        process.exit()
         
@@ -56,6 +56,7 @@ const deleteData = async() =>{
     }
 }
 
+console.log(process.argv)
 
 if(process.argv[2] === '-d'){
   deleteData()

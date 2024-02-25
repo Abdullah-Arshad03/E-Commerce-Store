@@ -3,7 +3,7 @@
 // desp   :  get User Profile
 // router :  GET / api/users/profile
 // access :  Private
-exports.getUserProfile = (req, res , next) =>{
+exports.getUserProfile = async(req, res , next) =>{
 res.send('getuserProfile')
 
 }
@@ -11,7 +11,7 @@ res.send('getuserProfile')
 // desp   :  get User Profile
 // router :  PUT / api/users/profile
 // access :  Private
-exports.updateUserProfile = (req, res , next) =>{
+exports.updateUserProfile = async(req, res , next) =>{
     res.send('updateUserProfile')
 
 
@@ -20,7 +20,7 @@ exports.updateUserProfile = (req, res , next) =>{
 // desp   :  get User Profile
 // router :  GET / api/users
 // access :  Private / admin
-exports.getUsers = (req, res , next) =>{
+exports.getUsers = async(req, res , next) =>{
     res.send('get User')
 
 
@@ -30,7 +30,7 @@ exports.getUsers = (req, res , next) =>{
 // desp   :  get User Profile
 // router :  GET / api/users/:id
 // access :  Private
-exports.getUserById = (req, res , next) =>{
+exports.getUserById = async(req, res , next) =>{
     res.send('get User by id')
 
 
@@ -39,7 +39,7 @@ exports.getUserById = (req, res , next) =>{
 // desp   :  get User Profile
 // router :  GET / api/users/:id
 // access :  Private / Admin
-exports.deleteUser = (req, res , next) =>{
+exports.deleteUser = async(req, res , next) =>{
 res.send('delete user')
 
 
@@ -49,7 +49,7 @@ res.send('delete user')
 // desp   :  get User Profile
 // router :  PUT / api/users/:id
 // access :  Private
-exports.updateUser = (req, res , next) =>{
+exports.updateUser = async (req, res , next) =>{
 
     res.send('update User')
 

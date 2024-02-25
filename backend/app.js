@@ -8,6 +8,12 @@ const port = process.env.PORT || 5000;
 const prodRoutes = require("./routes/productsRoutes");
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
+
+
+// body parser middleware
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+
 // handling the cors errors
 
 app.use((req, res, next) => {
