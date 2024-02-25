@@ -1,7 +1,8 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const errorFunc = require('../utils/errorFunc')
+const errorFunc = require("../utils/errorFunc");
+const generateToken = require("../utils/generateToken")
 
 //    desp   :  login the user / get Token,
 //    route  :  POST / api/auth/login
@@ -22,21 +23,8 @@ exports.loginUser = async (req, res, next) => {
       errorFunc(401, "Invalid Email or Password!");
     }
 
-    const token = jwt.sign(
-      { userId: user._id.toString(), email: user.email },
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1d",
-      }
-    );
-    
-
-    res.cookie("jwt", token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV !== "development",
-      sameSite: "strict",
-      maxAge: 1 * 24 * 60 * 60 * 1000, // 1 day
-    });
+  // generate jwt
+  generateToken(res , user._id , user.email)
 
     res.status(200).json({
       _id: user._id,
@@ -52,29 +40,57 @@ exports.loginUser = async (req, res, next) => {
   }
 };
 
-
-
 //    desp   :  Create New User,
 //    route  :  POST / api/auth/register
 //    access :  Public
 exports.registerUser = async (req, res, next) => {
-  res.send("in the registerUser route");
+  try {
+    const { name, email, password } = req.body;
+
+    const existedUser = await User.findOne({ email: email });
+
+    if (!existedUser) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      const user = new User({
+        name: name,
+        email: email,
+        password: hashedPassword,
+      });
+
+      const userCreated = await user.save();
+
+      if (!userCreated) {
+        errorFunc(400, "invalid User input");
+      }
+       
+       generateToken(res , userCreated._id , userCreated.email)
+
+      res.status(200).json({
+        message: "New User is registered !",
+        user: userCreated,
+      });
+    }
+    // throwing error if user already exists
+    errorFunc(400, "User Already Exists");
+  } catch (error) {
+    if (!error.statusCode) {
+      error.statusCode = 500;
+    }
+    next(error);
+  }
 };
-
-
 
 //    desp   :  login the user/ Clear Cookie,
 //    route  :  POST / api/auth/logout
 //    access :  Private
 exports.logoutUser = async (req, res, next) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expiresIn: new Date(0),
+  });
 
-    res.cookie('jwt' , '' ,{
-        httpOnly : true,
-        expiresIn : new Date(0)
-    })
-
-    res.status(200).json({
-        message : 'Logged Out!'
-    })
-
+  res.status(200).json({
+    message: "Logged Out!",
+  });
 };
