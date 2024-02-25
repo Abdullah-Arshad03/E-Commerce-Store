@@ -4,7 +4,7 @@ const userController = require('../controllers/userController')
 const {protectRoute , admin} = require('../middleware/authMiddleware')
 
 router.get('/profile', protectRoute , userController.getUserProfile)
-router.put('/profile', userController.updateUserProfile)
+router.put('/profile', protectRoute , userController.updateUserProfile)
 router.get('/' , protectRoute, admin, userController.getUsers)
 router.put('/:id', protectRoute, admin ,userController.updateUser)
 router.get('/:id', protectRoute, admin ,userController.getUserById)

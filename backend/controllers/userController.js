@@ -1,10 +1,34 @@
+const User = require('../models/userModel')
+const errorFunc = require('../utils/errorFunc')
+const catchError = require('../utils/catchError')
 
 
 // desp   :  get User Profile
 // router :  GET / api/users/profile
 // access :  Private
 exports.getUserProfile = async(req, res , next) =>{
-res.send('getuserProfile')
+
+    try {
+        console.log('this is the logged in user: ',req.user)
+        const user = await User.findById(req.user._id)
+
+        if(!user){
+            errorFunc(404 , 'User not found!')
+        }
+
+        res.status(200).json({
+            _id : user._id,
+            name : user.name, 
+            email : user.email,
+            isAdmin : user.isAdmin
+        })
+ 
+        
+        
+    } catch (error) {
+       catchError(error,next)
+    }
+
 
 }
 
@@ -12,7 +36,35 @@ res.send('getuserProfile')
 // router :  PUT / api/users/profile
 // access :  Private
 exports.updateUserProfile = async(req, res , next) =>{
-    res.send('updateUserProfile')
+
+  try {
+
+    const user = await User.findById(req.user._id)
+
+    if(!user){
+        errorFunc(404 , 'User not found!')
+    }
+
+    user.name = req.body.name || user.name
+    user.email = req.body.email || user.email
+    
+    if(req.body.password){
+        user.password = req.body.password
+    }
+    
+   const updatedUser =  await user.save()
+
+   res.status(200).json({
+    message : 'User profile is updated!',
+    _id : updatedUser._id,
+    name : updatedUser.name,
+    email : updatedUser.email,
+    password : updatedUser.password
+   })
+
+  } catch (error) {
+   catchError(error,next)
+  }
 
 
 }

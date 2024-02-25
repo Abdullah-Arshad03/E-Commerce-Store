@@ -27,6 +27,7 @@ exports.loginUser = async (req, res, next) => {
   generateToken(res , user._id , user.email)
 
     res.status(200).json({
+        message : 'User loggedIn Successfully!',
       _id: user._id,
       email: user.email,
       password: user.password,
@@ -85,6 +86,7 @@ exports.registerUser = async (req, res, next) => {
 //    route  :  POST / api/auth/logout
 //    access :  Private
 exports.logoutUser = async (req, res, next) => {
+
   res.cookie("jwt", "", {
     httpOnly: true,
     expiresIn: new Date(0),
