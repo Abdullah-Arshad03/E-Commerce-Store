@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cookieParser = require('cookie-parser')
 dotenv.config();
 
 const app = express();
@@ -13,6 +14,9 @@ const userRoutes = require('./routes/userRoutes')
 // body parser middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+// cookie parser middleware
+app.use(cookieParser())
 
 // handling the cors errors
 
@@ -27,6 +31,9 @@ app.use("/api/products", prodRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users' , userRoutes);
 
+
+
+// error handling middleware 
 
 app.use((error,req,res,next)=>{
   console.log("this is the error from the error middleware : ", error)
