@@ -1,4 +1,14 @@
 const User = require('../models/userModel')
+const bcrypt = require ('bcryptjs')
+
+
+// Error Helper Function 
+
+const errorFunc = ( statusCode , errorMessage ) =>{
+    const error  = new Error(errorMessage)
+    error.statusCode = statusCode // unauthorized status
+    throw error
+}
 
 //    desp   :  login the user / get Token,
 //    route  :  POST / api/auth/login
@@ -10,15 +20,17 @@ exports.loginUser = async(req, res , next) =>{
 
     try {
         const user = await User.findOne({email : email})
-        const Pass = await user.matchPassword(password)
-        console.log(Pass)
 
         if (!user){
-            const error  = new Error('Invalid Email or Password')
-            error.statusCode = 401 // unauthorized status
-            throw error
+           errorFunc(401 , 'Invalid Email or Password!')
         }
         
+        const passEqual = await bcrypt.compare(password , user.password) 
+        
+
+        if(!passEqual){
+            errorFunc(401 , 'Invalid Email or Password!')
+        }
 
         res.status(200).json({
             _id : user._id,
