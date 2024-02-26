@@ -8,6 +8,7 @@ const Order = require('./models/orderModel')
 const User = require('./models/userModel')
 const dotenv = require('dotenv')
 dotenv.config()
+
 connection()
 
 const importData = async() =>{
