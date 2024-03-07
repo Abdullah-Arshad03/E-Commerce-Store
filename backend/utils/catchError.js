@@ -5,5 +5,4 @@ const catchError = (error , next)=>{
     next(error)
 }
 
-
 module.exports = catchError

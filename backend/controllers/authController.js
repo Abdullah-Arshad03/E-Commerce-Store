@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const errorFunc = require("../utils/errorFunc");
+const catchError = require('../utils/catchError')
 const generateToken = require("../utils/generateToken")
 
 //    desp   :  login the user / get Token,
@@ -34,10 +35,7 @@ exports.loginUser = async (req, res, next) => {
       isAdmin: user.isAdmin,
     });
   } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    next(error);
+    catchError(error, next)
   }
 };
 
@@ -75,10 +73,7 @@ exports.registerUser = async (req, res, next) => {
     // throwing error if user already exists
     errorFunc(400, "User Already Exists");
   } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    next(error);
+    catchError(error, next)
   }
 };
 
@@ -86,7 +81,6 @@ exports.registerUser = async (req, res, next) => {
 //    route  :  POST / api/auth/logout
 //    access :  Private
 exports.logoutUser = async (req, res, next) => {
-
   res.cookie("jwt", "", {
     httpOnly: true,
     expiresIn: new Date(0),
