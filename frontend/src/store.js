@@ -1,6 +1,7 @@
 
 import {configureStore} from '@reduxjs/toolkit'
-import { apiSlice } from './slices/apiSlice'
+// import { apiSlice } from './slices/apiSlice'
+
 import {cartSlice} from './slices/cartSlice'
 
 
