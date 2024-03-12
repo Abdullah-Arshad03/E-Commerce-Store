@@ -19,7 +19,7 @@ import { addToCart , removeFromCart } from "../slices/cartSlice";
 const CartScreen = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems } = useSelector((state) => state.cart );
 
   const [qty, setQty] = useState(1);
 

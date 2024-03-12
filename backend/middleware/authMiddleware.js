@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 const errorFunc = require("../utils/errorFunc");
+const catchError = require('../utils/catchError')
 
 const protectRoute = async (req, res, next) => {
   try {
@@ -25,14 +26,11 @@ const protectRoute = async (req, res, next) => {
     let loggedInUser = await User.findById(userId).select('-password')
 
     req.user = loggedInUser
-    console.log(loggedInUser)
+    console.log(loggedInUser, 'or you can say ' , req.user)
     next()
 
   } catch (error) {
-    if (!error.statusCode) {
-      error.statusCode = 500;
-    }
-    next(error);
+  catchError(error , next)
   }
 };
 

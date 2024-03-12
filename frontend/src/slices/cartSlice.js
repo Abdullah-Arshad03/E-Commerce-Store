@@ -7,7 +7,7 @@ const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : { cartItems: [] };
 
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
   name: "cart",
   initialState : initialState,
   reducers: {
@@ -41,5 +41,6 @@ export const cartSlice = createSlice({
 
 // we have to export the addToCart reducer function as an action
 // every function we created inside the reducer we have to export that function as an action separately
-
+export {cartSlice}
 export const { addToCart , removeFromCart } = cartSlice.actions;
+
