@@ -8,7 +8,7 @@ const initialState  = {
 
 
 const authSlice = createSlice({
-    name : 'api' ,
+    name : 'auth' ,
     initialState : initialState,
     reducers : {
         setCredentials : (state , action) => {
@@ -19,5 +19,4 @@ const authSlice = createSlice({
 }})
 
 export {authSlice}
-
 export const {setCredentials} = authSlice.actions
