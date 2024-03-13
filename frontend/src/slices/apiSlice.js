@@ -10,5 +10,8 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     tagTypes: ['Product', 'Order', 'User'],
     endpoints: (builder) => ({})
+
+    // these above endpoints key, contain the actions for this slice and they will be extended in the separate file like actions for the product api are in the productApiSlice and likewise for all
+    
   });
 

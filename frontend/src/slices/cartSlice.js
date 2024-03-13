@@ -7,10 +7,13 @@ const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
   : { cartItems: [] };
 
+
+// this below cartSlice is the reducers actually it will added in the store after exporting from here as an reducer function
 const cartSlice = createSlice({
   name: "cart",
   initialState : initialState,
   reducers: {
+    //these below all functions inside th reducers key is the actions and will be export as an actions i-e cartSlice.actions, and then for calling them in any component of the app we can use the useDispatch from the react-redux
     addToCart: (state, action) => {
       const item = action.payload;
 
