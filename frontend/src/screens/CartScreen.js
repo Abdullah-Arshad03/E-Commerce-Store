@@ -88,7 +88,7 @@ const CartScreen = () => {
                         })}
                       </FormControl>
                     </Col>
-                    <Col md={2}>
+                    <Col md ={2}>
                       <Button type="button" variant="light" onClick={()=>{
                         removeFromCartHandler( item._id)
                       }}>

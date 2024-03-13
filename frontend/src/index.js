@@ -11,6 +11,7 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import HomeScreen from './screens/HomeScreen';
 import CartScreen from './screens/CartScreen';
 import ProductScreen from './screens/ProductScreen';
+import LoginScreen from './screens/LoginScreen';
 
 
 const router = createBrowserRouter(
@@ -21,7 +22,11 @@ const router = createBrowserRouter(
 
     <Route path='/products/:id' element={<ProductScreen/>}/>
 
-    <Route path='/cart' element={<CartScreen/>}/>
+    <Route path='/cart' element={<CartScreen/>}/> 
+    <Route path='/login' element={<LoginScreen/>}/> 
+
+
+    
 
     </Route>
 
