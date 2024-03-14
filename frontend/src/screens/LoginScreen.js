@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState , useEffect } from "react";
+import { Link , useLoaderData, useLocation , useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Form,
   Row,
@@ -11,13 +12,43 @@ import {
 import { Button } from "@mui/material/";
 
 import FormContainer from "../components/FormContainer";
+import {useLoginMutation} from '../slices/authApiSlice'
+import { setCredentials } from "../slices/authSlice";
+import {toast} from 'react-toastify'
+
 
 const LoginScreen = () => {
+
+  const {search} = useLocation()
+  const sp = new URLSearchParams(search)
+  const redirect = sp.get('redirect') || '/'
+  const navigate = useNavigate()
+  const {userInfo} = useSelector((state)=> state.auth)
+  const dispatch = useDispatch()
+
+  const [login , {isLoading , error}] = useLoginMutation()
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
+    try {
+      // this following statement is like hitting the post api and after successfully it hits, 
+      // we get the response in the res variable and obviously after posting the data into the database
+      // we want to call the setCredentials func from our authSlice, to set the userInfo ( we get after 
+      // successfully making the post request) , in our frontEnd, in the Redux.
+      const res =  await login({email, password})
+      console.log(res)
+      dispatch(setCredentials({...res}))
+      navigate(redirect)
+      
+      
+    } catch (error) {
+      toast.error(error?.data?.message || error.error)
+      console.log(error)
+    }
+
     console.log("submit");
   };
 
@@ -47,7 +78,7 @@ const LoginScreen = () => {
               onChange={(e) => setPassword(e.target.value)}
             ></FormControl>
           </FormGroup>
-
+   <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}>
           <Button
             className="buttonn"
             // variant="outlined"
@@ -56,13 +87,15 @@ const LoginScreen = () => {
           >
             Sign In
           </Button>
+          </div>
         </Form>
-
+        <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}>
         <Row className="py-3">
           <Col>
             New Customer ? <Link  style={{ color:'black'}}to="/register">Register</Link>
           </Col>
         </Row>
+        </div>
       </FormContainer>
     </>
   );
