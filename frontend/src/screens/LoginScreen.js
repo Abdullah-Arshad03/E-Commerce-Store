@@ -14,7 +14,8 @@ import { Button } from "@mui/material/";
 import FormContainer from "../components/FormContainer";
 import {useLoginMutation} from '../slices/authApiSlice'
 import { setCredentials } from "../slices/authSlice";
-import {toast} from 'react-toastify'
+import { toast , ToastContainer } from 'react-toastify';
+import Loader from "../components/Loader";
 
 
 const LoginScreen = () => {
@@ -37,23 +38,28 @@ const LoginScreen = () => {
       // this following statement is like hitting the post api and after successfully it hits, 
       // we get the response in the res variable and obviously after posting the data into the database
       // we want to call the setCredentials func from our authSlice, to set the userInfo ( we get after 
-      // successfully making the post request) , in our frontEnd, in the Redux.
-      const res =  await login({email, password})
+      // successfully making the post request, in our frontEnd, in the Redux.
+
+      // following line of code is making the post request the object inside the login function is the data, we are sending over the wire.
+      const res =  await login({email, password}).unwrap()
+      if(res.error)
       console.log(res)
       dispatch(setCredentials({...res}))
+      console.log("submit");
       navigate(redirect)
+
       
       
     } catch (error) {
-      toast.error(error?.data?.message || error.error)
-      console.log(error)
+      toast.error(`${error.data.message}`)
+      console.log('this is the error',error)
     }
 
-    console.log("submit");
   };
 
   return (
     <>
+    <ToastContainer></ToastContainer>
       <FormContainer>
         <h1>Sign In</h1>
         <Form onSubmit={submitHandler}>
@@ -83,16 +89,18 @@ const LoginScreen = () => {
             className="buttonn"
             // variant="outlined"
              type="submit"
+             disabled = {isLoading}
             style={{marginTop: "10px", color: 'black', border : '1px solid black', padding: '5px 20px' }}
           >
             Sign In
           </Button>
           </div>
+      <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}> {isLoading ? (<><Loader></Loader></>) : (<></>)}</div>
         </Form>
         <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}>
         <Row className="py-3">
           <Col>
-            New Customer ? <Link  style={{ color:'black'}}to="/register">Register</Link>
+            New Customer ? <Link  style={{ color:'black'}}to={ redirect ? `/register?redirect=${redirect}` : '/register'}>Register</Link>
           </Col>
         </Row>
         </div>
