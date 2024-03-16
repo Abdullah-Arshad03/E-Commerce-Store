@@ -46,7 +46,7 @@ const RegisterScreen = () => {
      
             const res =  await register({name , email, password}).unwrap()
             console.log(res)
-            dispatch(setCredentials({...res}))
+            dispatch(setCredentials({...res.user}))
             console.log("submit");
             navigate(redirect)
       
@@ -125,7 +125,7 @@ const RegisterScreen = () => {
       <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}> 
       
       {isLoading ? (<><Loader></Loader></>) : (<></>)}</div>
-      
+
         </Form>
         <div style={{display: 'flex' , justifyContent: 'center' , alignItems: 'center'}}>
         <Row className="py-3">
