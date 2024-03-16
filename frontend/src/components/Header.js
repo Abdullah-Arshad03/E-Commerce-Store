@@ -3,12 +3,37 @@ import {Badge ,Navbar , Container , Nav, NavbarBrand, NavbarToggle, NavbarCollap
 import {  FaShoppingCart , FaUser} from 'react-icons/fa'
 import logo from '../assets/styles/logo.png'
 import {LinkContainer} from 'react-router-bootstrap'
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useLogoutMutation } from "../slices/authApiSlice";
+import { useNavigate } from "react-router-dom";
+import { toast , ToastContainer } from "react-toastify";
+import { logout , setCredentials } from "../slices/authSlice";
+
 
 const Header = () =>{
 
-    const logoutHandler = () =>{
-        console.log('logout')
+   
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const [logoutCall , {isLoading }] = useLogoutMutation()
+
+    const logoutHandler = async() =>{
+
+        try {
+          
+            const res = await logoutCall().unwrap()
+            console.log('this is the res', res)
+            dispatch(logout())
+            navigate('/login')
+
+
+        } catch (error) {
+            console.log(error)
+
+            
+        }
     }
 
       const { cartItems } = useSelector((state)=> state.cart )
@@ -17,6 +42,7 @@ const Header = () =>{
 
       console.log(cartItems)
     return(<>
+    <ToastContainer></ToastContainer>
     <header>
     <Navbar  bg="dark" variant="dark" expand='md' collapseOnSelect>
         <Container>

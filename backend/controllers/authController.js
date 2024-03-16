@@ -23,7 +23,7 @@ exports.loginUser = async (req, res, next) => {
     if (!passEqual) {
       errorFunc(401, "Invalid Email or Password!");
     }
-
+console.log(user._id , user.email , user)
   // generate jwt
   generateToken(res , user._id , user.email)
 
@@ -82,12 +82,15 @@ exports.registerUser = async (req, res, next) => {
 //    route  :  POST / api/auth/logout
 //    access :  Private
 exports.logoutUser = async (req, res, next) => {
+  console.log('cookie destroying!')
   res.cookie("jwt", "", {
     httpOnly: true,
     expiresIn: new Date(0),
   });
 
+  console.log('destroyed!')
   res.status(200).json({
     message: "Logged Out!",
   });
+  console.log('done destruction!')
 };
