@@ -30,6 +30,7 @@ exports.loginUser = async (req, res, next) => {
     res.status(200).json({
         message : 'User loggedIn Successfully!',
       _id: user._id,
+      name : user.name,
       email: user.email,
       password: user.password,
       isAdmin: user.isAdmin,

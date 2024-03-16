@@ -1,5 +1,5 @@
 import React from "react";
-import {Badge ,Navbar , Container , Nav, NavbarBrand, NavbarToggle, NavbarCollapse} from 'react-bootstrap'
+import {Badge ,Navbar , Container , Nav, NavbarBrand, NavbarToggle, NavbarCollapse, NavDropdown} from 'react-bootstrap'
 import {  FaShoppingCart , FaUser} from 'react-icons/fa'
 import logo from '../assets/styles/logo.png'
 import {LinkContainer} from 'react-router-bootstrap'
@@ -7,7 +7,14 @@ import { useSelector } from "react-redux";
 
 const Header = () =>{
 
+    const logoutHandler = () =>{
+        console.log('logout')
+    }
+
       const { cartItems } = useSelector((state)=> state.cart )
+      const { userInfo } = useSelector((state)=> state.auth)
+
+
       console.log(cartItems)
     return(<>
     <header>
@@ -36,11 +43,29 @@ const Header = () =>{
                     }
                     </Nav.Link>
                 </LinkContainer>
-                <LinkContainer to='/login'>
+
+                {userInfo? (<>
                 
-                <Nav.Link href="/login"> <span style={{color: 'white'}}> <FaUser/> Sign In </span></Nav.Link>
+                
+                <NavDropdown  title={userInfo.name} id='username'>
+                    <LinkContainer to ="profile">
+                        
+                    <NavDropdown.Item eventKey="profile">Profile</NavDropdown.Item>
+                    
+                    </LinkContainer>
+                    <NavDropdown.Item eventKey="logout" onClick={logoutHandler}>logout</NavDropdown.Item>
+
+                </NavDropdown>
+            
+                
+                </>) : (<>
+                    <LinkContainer to='/login'>
+                
+                <Nav.Link href="/login" > <span style={{color: 'white'}}> <FaUser/> Sign In </span></Nav.Link>
                
                 </LinkContainer>
+                </>)}
+               
                 </Nav>
                 
             </Navbar.Collapse>

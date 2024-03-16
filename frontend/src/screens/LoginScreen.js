@@ -42,14 +42,11 @@ const LoginScreen = () => {
 
       // following line of code is making the post request the object inside the login function is the data, we are sending over the wire.
       const res =  await login({email, password}).unwrap()
-      if(res.error)
       console.log(res)
+
       dispatch(setCredentials({...res}))
       console.log("submit");
       navigate(redirect)
-
-      
-      
     } catch (error) {
       toast.error(`${error.data.message}`)
       console.log('this is the error',error)
