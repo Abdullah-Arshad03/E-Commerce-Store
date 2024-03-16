@@ -10,6 +10,7 @@ const generateToken = (res , userId , email) =>{
           expiresIn: "1d",
         }
       );
+      
       console.log('cookie generated!')
       res.cookie("jwt", token, {
         httpOnly: true,
