@@ -5,7 +5,7 @@ import { updateCart } from "../utils/cartUtils";
 
 const initialState = localStorage.getItem("cart")
   ? JSON.parse(localStorage.getItem("cart"))
-  : { cartItems: [] };
+  : { cartItems: [] , shippingAddress : {} , paymentMethod : 'Paypal' };
 
 
 // this below cartSlice is the reducers actually it will added in the store after exporting from here as an reducer function
@@ -27,7 +27,7 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item];
       }
 
-      updateCart(state);
+     return updateCart(state);
     },
 
     removeFromCart : (state , action) =>{
@@ -35,8 +35,13 @@ const cartSlice = createSlice({
 
       state.cartItems = state.cartItems.filter((x)=>x._id !== prodId)
 
-      updateCart(state)
+      return updateCart(state)
       
+    }, 
+    saveShippingAddress : ( state , action )=>{
+        state.shippingAddress = action.payload
+
+        return updateCart(state)
     }
   },
 });
@@ -45,5 +50,5 @@ const cartSlice = createSlice({
 // we have to export the addToCart reducer function as an action
 // every function we created inside the reducer we have to export that function as an action separately
 export {cartSlice}
-export const { addToCart , removeFromCart } = cartSlice.actions;
+export const { addToCart , removeFromCart , saveShippingAddress } = cartSlice.actions;
 

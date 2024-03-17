@@ -10,6 +10,7 @@ const protectRoute = async (req, res, next) => {
     let decodedToken
 
     token = req.cookies.jwt;
+    console.log ('this is the token in the protect route' , token)
 
     if (!token) {
       errorFunc(401, "Not Authorized, no Token!");
