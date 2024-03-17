@@ -14,7 +14,7 @@ import { Button } from "@mui/material/";
 import FormContainer from "../components/FormContainer";
 import {useRegisterMutation} from '../slices/authApiSlice'
 import { setCredentials } from "../slices/authSlice";
-import { toast , ToastContainer } from 'react-toastify';
+import { toast ,Toaster } from 'react-hot-toast';
 import Loader from "../components/Loader";
 
 
@@ -49,6 +49,7 @@ const RegisterScreen = () => {
             dispatch(setCredentials({...res.user}))
             console.log("submit");
             navigate(redirect)
+            toast.success('Successfully Registered!')
       
           } catch (error) {
             toast.error(`${error.data.message}`)
@@ -61,7 +62,7 @@ const RegisterScreen = () => {
 
   return (
     <>
-    <ToastContainer></ToastContainer>
+   <Toaster/>
       <FormContainer>
         <h1>Sign Up</h1>
         <Form onSubmit={submitHandler}>

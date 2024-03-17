@@ -14,7 +14,7 @@ import { Button } from "@mui/material/";
 import FormContainer from "../components/FormContainer";
 import {useLoginMutation} from '../slices/authApiSlice'
 import { setCredentials } from "../slices/authSlice";
-import { toast , ToastContainer } from 'react-toastify';
+import toast, { Toaster } from 'react-hot-toast';
 import Loader from "../components/Loader";
 
 
@@ -47,6 +47,7 @@ const LoginScreen = () => {
       dispatch(setCredentials({...res}))
       console.log("submit");
       navigate(redirect)
+      toast.success('Logged In')
     } catch (error) {
       toast.error(`${error.data.message}`)
       console.log('this is the error',error)
@@ -56,7 +57,7 @@ const LoginScreen = () => {
 
   return (
     <>
-    <ToastContainer></ToastContainer>
+  
       <FormContainer>
         <h1>Sign In</h1>
         <Form onSubmit={submitHandler}>
