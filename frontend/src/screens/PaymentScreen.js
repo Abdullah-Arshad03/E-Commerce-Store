@@ -7,6 +7,7 @@ import { Form, FormGroup, FormLabel , Col, FormCheck} from "react-bootstrap";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { savePaymentMethod } from "../slices/cartSlice";
+import { toast, Toaster } from "react-hot-toast";
 
 
 const PaymentScreen =()=>{
@@ -25,12 +26,16 @@ const submitHandler = (e) =>{
 }
 
 useEffect(()=>{
-    if(!shippingAddress){
+    console.log()
+    if(shippingAddress.address === '' || shippingAddress.city === '' || shippingAddress.postalCode === '' || shippingAddress.country ===''){
         navigate('/shipping')
+        toast.error('Please Fill All Feilds')
     }
+    
 }, [shippingAddress , navigate])
 
     return(<>
+    <Toaster></Toaster>
     <FormContainer>
      <CheckoutSteps step1={true} step2={true} step3={true}></CheckoutSteps>
      <h1>Payment Method</h1>

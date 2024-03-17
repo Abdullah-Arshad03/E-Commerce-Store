@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 const prodRoutes = require("./routes/productsRoutes");
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
+const orderRoutes = require('./routes/orderRoutes')
 
 
 // body parser middleware
@@ -42,6 +43,7 @@ app.use((req, res, next) => {
 app.use("/api/products", prodRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users' , userRoutes);
+app.use('/api/orders', orderRoutes )
 
 
 
