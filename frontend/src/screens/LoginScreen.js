@@ -23,6 +23,7 @@ const LoginScreen = () => {
   const {search} = useLocation()
   const sp = new URLSearchParams(search)
   const redirect = sp.get('redirect') || '/'
+  console.log('The value in the redirect is : ', redirect)
   const navigate = useNavigate()
   const {userInfo} = useSelector((state)=> state.auth)
   const dispatch = useDispatch()

@@ -31,7 +31,7 @@ const ShippingScreen = ()=>{
     return(<>
   <FormContainer>
     <CheckoutSteps step1={true} step2={true}></CheckoutSteps>
-    <h1>Shipping</h1>
+    <h1 style={{marginBottom: '20px'}}>Shipping</h1>
 
     <Form onSubmit={submitHandler}>
         <FormGroup  controlId="Address" className="my-2">
