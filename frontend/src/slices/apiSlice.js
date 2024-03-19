@@ -7,7 +7,10 @@ import { BASE_URL } from '../constants'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: BASE_URL , credentials:'include' }),
+    baseQuery: fetchBaseQuery({
+         baseUrl: BASE_URL,
+         credentials:'include' 
+        }),
     tagTypes: ['Product', 'Order', 'User'],
     endpoints: (builder) => ({}),
     

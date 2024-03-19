@@ -58,6 +58,7 @@ exports.registerUser = async (req, res, next) => {
         password: hashedPassword,
       });
 
+
       const userCreated = await user.save();
 
       if (!userCreated) {
