@@ -4,11 +4,11 @@ const orderController = require('../controllers/orderController')
 const router = express.Router()
 const {protectRoute , admin} = require('../middleware/authMiddleware')
 
-router.post('/order' , protectRoute ,  orderController.myOrder)
-router.get ('/orders' , protectRoute  ,  orderController.getMyOrders)
-router.get('/order/:id' , protectRoute ,admin ,  orderController.getOrderById)
+router.post('/myorder' , protectRoute ,  orderController.myOrder)
+router.get ('/myorders' , protectRoute  ,  orderController.getMyOrders)
 router.put('/:id/pay' ,protectRoute , orderController.updateOrderToPaid)
-router.put ('/:id/deliver' , protectRoute , admin ,  orderController.updateOrderToDelivered)
-router.get('/allOrders', protectRoute , admin ,orderController.getAllOrders )
+router.get('/:id' , protectRoute ,admin ,  orderController.getOrderById) // admin route
+router.put ('/:id/deliver' , protectRoute , admin ,  orderController.updateOrderToDelivered) // admin route
+router.get('/allOrders', protectRoute , admin ,orderController.getAllOrders ) // admin route
 
 module.exports = router  
