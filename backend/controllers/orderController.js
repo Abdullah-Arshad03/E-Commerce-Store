@@ -5,17 +5,14 @@ const catchError  = require('../utils/catchError')
 exports.myOrder = async (req, res, next) => {
   const {
     orderItems,
-    shippingAdress,
+    shippingAddress,
+    paymentResult ,
     paymentMethod,
-    paymentResult,
     itemsPrice,
     taxPrice,
     shippingPrice,
     totalPrice,
-    // isPaid,
-    // paidAt,
-    // isDelivered,
-    // deliveredAt
+  
   } = req.body;
 
 
@@ -33,12 +30,13 @@ exports.myOrder = async (req, res, next) => {
                 _id : undefined
               })),
         
-            shippingAddress : shippingAdress,
+            shippingAddress : shippingAddress,
             paymentMethod: paymentMethod ,
-            paymentResult : paymentResult ,
+            paymentResult: paymentResult,
             itemsPrice : itemsPrice, 
             shippingPrice: shippingPrice,
-            taxPrice : taxPrice
+            taxPrice : taxPrice,
+            totalPrice : totalPrice
         
            })
         

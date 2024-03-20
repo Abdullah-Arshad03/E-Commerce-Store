@@ -9,7 +9,7 @@ const orderApiSlice = apiSlice.injectEndpoints({
             query : (data)=>({
                 url : `${ORDERS_URL}/mine`,
                 method : 'POST',
-                body : data
+                body : {...data}
                 
              })
         })
