@@ -47,8 +47,11 @@ const cartSlice = createSlice({
       state.paymentMethod = action.payload
 
       return updateCart(state)
+    },
+    clearCartItems : (state, action) =>{
+      state.cartItmes =  []
+      return updateCart(state)
     }
-
   },
 });
 
@@ -56,5 +59,5 @@ const cartSlice = createSlice({
 // we have to export the addToCart reducer function as an action
 // every function we created inside the reducer we have to export that function as an action separately
 export {cartSlice}
-export const { addToCart , removeFromCart , saveShippingAddress , savePaymentMethod } = cartSlice.actions;
+export const { addToCart , removeFromCart , saveShippingAddress , savePaymentMethod , clearCartItems} = cartSlice.actions;
 

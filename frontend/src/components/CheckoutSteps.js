@@ -46,7 +46,7 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
        <NavItem>
        {step4 ? (<>
         <LinkContainer to='/placeorder'>
-            <NavLink className="text-dark"> <span style={{color: 'black', fontWeight: '500'}} > Place Order </span></NavLink>
+            <NavLink > <span style={{color: 'black', fontWeight: '500'}} > Place Order </span></NavLink>
         </LinkContainer>
        </>) : (<>
        <NavLink  className="text-dark" aria-disabled>Place Order</NavLink>
