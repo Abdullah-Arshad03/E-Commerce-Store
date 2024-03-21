@@ -113,6 +113,11 @@ exports.updateOrderToDelivered = async (req, res, next) => {
 };
 
 exports.getAllOrders = async (req, res, next) => {
-  res.send("get All Orders");
+    try {
+        res.send("get All Orders");
+    } catch (error) {
+        console.log(error)
+    }
+  
 };
 

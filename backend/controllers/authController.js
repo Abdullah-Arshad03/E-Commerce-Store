@@ -60,7 +60,7 @@ exports.registerUser = async (req, res, next) => {
 
 
       const userCreated = await user.save();
-
+      
       if (!userCreated) {
         errorFunc(400, "invalid User input");
       }
