@@ -6,6 +6,7 @@ import {createBrowserRouter , Route , createRoutesFromElements, RouterProvider} 
 import App from './App';
 import {Provider} from 'react-redux'
 import store from './store';
+import {PayPalScriptProvider} from '@paypal/react-paypal-js'
 import reportWebVitals from './reportWebVitals';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import HomeScreen from './screens/HomeScreen';
@@ -57,7 +58,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
+      <PayPalScriptProvider deferLoading={true}>
    <RouterProvider router={router}></RouterProvider>
+   </PayPalScriptProvider> 
    </Provider>
   </React.StrictMode>
 );

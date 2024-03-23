@@ -46,7 +46,7 @@ app.use('/api/users' , userRoutes);
 app.use('/api/orders', orderRoutes )
 
 
-app.get('api/config/paypal', (req, res) =>
+app.get('/api/config/paypal', (req, res) =>
    res.send({clientId : process.env.PAYPAL_CLIENT_ID})
 )
 
@@ -68,8 +68,8 @@ app.use((error,req,res,next)=>{
 
 const connection = async () => {
   try {
-    await mongoose.connect(process.env.MONGO_URI);
-  // await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
+    // await mongoose.connect(process.env.MONGO_URI);
+  await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
     console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");

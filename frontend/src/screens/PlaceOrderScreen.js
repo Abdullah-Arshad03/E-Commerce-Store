@@ -46,7 +46,7 @@ const PlaceOrderScreen = () => {
             totalPrice : cart.totalPrice,
         }).unwrap()
         console.log('order is placed!',res)
-        // dispatch(clearCartItems())
+        dispatch(clearCartItems())
         console.log('order is placed!')
         navigate(`/order/${res.createdOrder._id}`) // that is the id of the order document created in the database!
     } catch (error) {
