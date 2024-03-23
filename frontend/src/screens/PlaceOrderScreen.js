@@ -50,7 +50,8 @@ const PlaceOrderScreen = () => {
         console.log('order is placed!')
         navigate(`/order/${res.createdOrder._id}`) // that is the id of the order document created in the database!
     } catch (error) {
-       toast.error(error)
+      console.log('in the catch' , error)
+       toast.error('Sever Error, Order cannot be placed')
     }
   };
 
@@ -190,7 +191,7 @@ const PlaceOrderScreen = () => {
             <ListGroupItem>
               {error ? (
                 <>
-                  <Message>Unfortunately Ordered isnt Placed</Message>
+                  <Message>{error.message}</Message>
                 </>
               ) : (
                 <></>

@@ -9,13 +9,15 @@ import { Row, Col, ListGroup, ListGroupItem ,Image ,Card} from "react-bootstrap"
 import Message from "../components/Message";
 import Loader from "../components/Loader";
 import {toast , Toaster} from 'react-hot-toast'
+import { Button } from "@mui/material";
 
 const OrderScreen = () => {
   const navigate = useNavigate();
   const { orderId } = useParams();
-
-  // the refech is the function, which we just call to refetch the new data.
   const { data, refetch, isLoading, error } = useGetOrderByIdQuery(orderId);
+
+  console.log('this is the data: ', data)
+  // the refech is the function, which we just call to refetch the new data.
 
   const [payOrder , {isLoading : loadingPay}] = usePayOrderMutation()
 
@@ -27,34 +29,88 @@ const OrderScreen = () => {
 
   const {userInfo} = info
 
-  // useEffect(()=>{
-  //   if(!errorPayPal && !loadingPayPal && paypal.clientId) {
-  //     const loadPayPalScript = async ()=>{
-  //       paypalDispatch({
-  //         type: 'resetOptions',
-  //         value : {
-  //           'clientId' : paypal.clientId,
-  //           currency : 'USD'
-  //         }
-  //       })
 
-  //       paypalDispatch({type : 'setLoadingStatus' , value : 'pending'})
+  useEffect(()=>{
+   
+    if(!errorPayPal && !loadingPayPal && paypal.clientId) {
+      const loadPayPalScript = async ()=>{
+        paypalDispatch({
+          type: 'resetOptions',
+          value : {
+            'clientId' : paypal.clientId,
+            currency : 'USD'
+          }
+        })
 
-  //     }
-  //     if(data.order && !data.order.isPaid) {
-  //       if (!window.paypal) {
-  //         loadPayPalScript()
+        paypalDispatch({type : 'setLoadingStatus' , value : 'pending'})
 
-  //       }
+      }
+      if(!window.paypal) { loadPayPalScript()
+      }
+    }
+     
+    //   if(data.order && !data.order.isPaid) {
+    //     if (!window.paypal) {
+    //       loadPayPalScript()
 
-  //     }
-  //   }
+    //     }
 
-  // }, [data, paypal,paypalDispatch, loadingPayPal, errorPayPal])
+    //   }
+    // }
+
+  }, [])
+
+async function onApproveTest(){
+
+  try {
+    await payOrder({orderId , details :{ id : orderId , updateTime : 'lol', status: 'lol', emailAddress: userInfo.email
+  }})
+  refetch()
+  toast.success('Payment Successful')
+  
+  } catch (error) {
+     toast.error('Payment Failed')
+  }
+
+
+
+}
+function onApprove(data, actions){
+  return actions.order.capture().then(async(details)=>{
+
+    try {
+      await payOrder({orderId , details})
+      refetch()
+      toast.success('Payment Successfull!')
+    } catch (error) {
+       toast.error(error?.data?.message || error.message)
+    }
+   
+  }) 
+}
+
+function createOrder(dataa, actions){
+  return actions.order.create({
+    purchase_units : [
+      {
+        amount: {
+          value : data.order.totalPrice
+        },  
+      },
+    ],
+  }).then((orderId)=>{
+    return orderId
+  })
+}
+
+
+function onError(error){
+  toast.error(error.message)
+}
 
 
   return (
-    <>
+    <><Toaster></Toaster>
       {isLoading ? (
         <>
           <Loader></Loader>
@@ -175,6 +231,37 @@ const OrderScreen = () => {
                   <Col>${data.order.totalPrice}</Col>
                 </Row>
               </ListGroupItem>
+
+              {loadingPay? (<><Loader></Loader></>) : (<></>)}
+
+              {isPending? (<><Loader></Loader></>) : (<>
+
+              <ListGroupItem>
+      <div>
+             
+          <Button
+            className="buttonn"
+            onClick={onApproveTest}
+            style={{marginTop: "10px", marginBottom:'15px' ,  color: 'black', border : '1px solid black', padding: '5px 20px' }}
+          >
+            Test Pay Order 
+          </Button>
+  </div>
+
+  <div>
+    <PayPalButtons
+    
+    onApprove={onApprove}
+    createOrder={createOrder}
+    onError={onError}>
+
+    </PayPalButtons>
+
+  </div>
+
+              </ListGroupItem>
+              
+              </>)}
 
               
             </ListGroup>
