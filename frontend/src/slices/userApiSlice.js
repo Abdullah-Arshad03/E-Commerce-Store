@@ -11,10 +11,10 @@ const userApiSlice = apiSlice.injectEndpoints({
                 method : 'PUT',
                 body : {...data} 
             })
-        })
+        }),
+
     })
 })
 
 export {userApiSlice}
-
-export const {useUserProfileMutation} = userApiSlice
+export const {useUserProfileMutation } = userApiSlice
