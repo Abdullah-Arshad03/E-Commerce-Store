@@ -21,6 +21,7 @@ const orderApiSlice = apiSlice.injectEndpoints({
            }),
            keepUnusedDataFor : 5
         }),
+
         payOrder : builder.mutation({
           query : ({orderId , details })=>({
             url : `${ORDERS_URL}/${orderId}/pay`, // this the route which we created at the backend
@@ -29,16 +30,28 @@ const orderApiSlice = apiSlice.injectEndpoints({
               
           })
         }), 
+
         getPaypalClientId : builder.query({
          query  : ()=>({
             url : `${PAYPAL_URL}`
          }),
          keepUnusedDataFor : 5
         }),
+
+
         LoggedInOrders : builder.query({
          query : ()=>({
              url : `${ORDERS_URL}/myorders`,
              method : 'GET'
+         }),
+         keepUnusedDataFor : 5
+        })
+        ,
+
+        getOrderList : builder.query({
+         query : ()=>({
+            url : `${ORDERS_URL}/`,
+            method : 'GET'
          }),
          keepUnusedDataFor : 5
         })
@@ -48,4 +61,4 @@ const orderApiSlice = apiSlice.injectEndpoints({
 
 export {orderApiSlice}
 
-export const {useCreateOrderMutation , useGetOrderByIdQuery , useGetPaypalClientIdQuery , usePayOrderMutation , useLoggedInOrdersQuery} = orderApiSlice
+export const {useCreateOrderMutation , useGetOrderByIdQuery , useGetPaypalClientIdQuery , usePayOrderMutation , useLoggedInOrdersQuery , useGetOrderListQuery} = orderApiSlice

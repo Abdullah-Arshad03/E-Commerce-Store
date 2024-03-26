@@ -9,7 +9,7 @@ const AdminRoute = () =>{
 
     {userInfo && userInfo.isAdmin ? (<><Outlet></Outlet></>) : (<>
 
-    <Navigate to='/login'></Navigate>
+    <Navigate to='/'></Navigate>
     
     </>)}
     

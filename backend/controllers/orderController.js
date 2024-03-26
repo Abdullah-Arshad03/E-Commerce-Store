@@ -50,9 +50,9 @@ exports.myOrder = async (req, res, next) => {
 exports.getMyOrders = async (req, res, next) => {
   //fetching the loggedin user's order
   try {
-    console.log(req.user._id)
-    const userId = req.user._id
-    const order = await Order.find({user : userId});
+    console.log(req.user._id);
+    const userId = req.user._id;
+    const order = await Order.find({ user: userId });
     console.log("order of the loggedin user ", order);
 
     if (!order) {
@@ -72,7 +72,7 @@ exports.getMyOrders = async (req, res, next) => {
 exports.getOrderById = async (req, res, next) => {
   try {
     const orderId = req.params.id;
-   console.log(orderId)
+    console.log(orderId);
     // we also want to add the user's email and password inside order object received from the following query. so we use populate to populate the user key in the order and extract name and email from it.
 
     const order = await Order.findById(orderId).populate("user", "name email");
@@ -125,10 +125,18 @@ exports.updateOrderToDelivered = async (req, res, next) => {
   res.send("update the order to the delivered");
 };
 
+// GET all orders it is admin route
 exports.getAllOrders = async (req, res, next) => {
   try {
-    res.send("get All Orders");
+    const orders = await Order.find().populate("user", "_id name");
+    if (!orders) {
+      catchError(404, "Orders are not found!");
+    }
+    res.status(200).json({
+      messsage: "All orders are grabbed!",
+      orders: orders,
+    });
   } catch (error) {
-    console.log(error);
+    catchError(error, next);
   }
 };

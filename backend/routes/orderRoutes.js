@@ -9,6 +9,6 @@ router.get ('/myorders' , protectRoute  ,  orderController.getMyOrders)
 router.put('/:id/pay' ,protectRoute , orderController.updateOrderToPaid)
 router.get('/:id' , protectRoute ,  orderController.getOrderById) 
 router.put ('/:id/deliver' , protectRoute , admin ,  orderController.updateOrderToDelivered) // admin route
-router.get('/allOrders', protectRoute , admin ,orderController.getAllOrders ) // admin route
+router.get('/', protectRoute , admin ,orderController.getAllOrders ) // admin route
 
 module.exports = router  

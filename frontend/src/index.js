@@ -20,19 +20,18 @@ import PaymentScreen from './screens/PaymentScreen';
 import PlaceOrderScreen from './screens/PlaceOrderScreen';
 import OrderScreen from './screens/OrderScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import AdminRoute from './components/AdminRoute';
+import OrderListScreen from './screens/Admin/OrderListScreen';
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<App></App>}> 
-
+   
     <Route index={true} path='/' element={<HomeScreen/>}/>
-
     <Route path='/products/:id' element={<ProductScreen/>}/>
-
     <Route path='/cart' element={<CartScreen/>}/>
-    
     <Route path='/login' element={<LoginScreen/>}/> 
-
     <Route path='/register' element={<RegisterScreen/>}/> 
 
     // right now we are setting up this route straightforward, but we have to set this, with some other approach, as we dont want to visit this route, without login, so keeping in view this, we have to set the route in such a way that we can not access shipping route without login
@@ -40,8 +39,6 @@ const router = createBrowserRouter(
 // following are the Private Routes
 
      <Route path='' element={<PrivateRoute></PrivateRoute>}>
-      
-
      <Route path='/shipping' element={<ShippingScreen/>}/> 
      <Route path='/payment' element={<PaymentScreen/>}/> 
      <Route path='/placeorder' element = {<PlaceOrderScreen/>}></Route>
@@ -52,6 +49,15 @@ const router = createBrowserRouter(
     </Route >
 
 
+    <Route path='' element={<AdminRoute></AdminRoute>}>
+
+      <Route path ='/admin/orderlist' element={<OrderListScreen></OrderListScreen>}></Route>
+
+
+
+
+
+    </Route>
 
     </Route> 
   )
