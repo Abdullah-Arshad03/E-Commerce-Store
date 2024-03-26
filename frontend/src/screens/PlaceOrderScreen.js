@@ -37,7 +37,7 @@ const PlaceOrderScreen = () => {
 
     try {
         const res = await placeOrder({
-            orderItems : cart.cartItems ,
+            orderItems : [...cart.cartItems] ,
             shippingAddress : {...cart.shippingAddress} ,
             paymentMethod : cart.paymentMethod,
             itemsPrice : cart.itemsPrice,

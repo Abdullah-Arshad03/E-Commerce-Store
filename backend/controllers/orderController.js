@@ -122,7 +122,33 @@ exports.updateOrderToPaid = async (req, res, next) => {
 };
 
 exports.updateOrderToDelivered = async (req, res, next) => {
-  res.send("update the order to the delivered");
+
+  try {
+    const orderId = req.params.id
+    const order = await Order.findById(orderId)
+
+    if(!order){
+      errorFunc(404 , 'order not found!')
+    }
+
+
+    order.isDelivered = true
+    order.deliveredAt = Date.now()
+
+    const updatedOrder = await order.save()
+
+    res.status(200).json({
+      message : 'Delivery status updated',
+      updatedOrder : updatedOrder
+    })
+    
+  } catch (error) {
+    
+  }
+
+
+
+  
 };
 
 // GET all orders it is admin route

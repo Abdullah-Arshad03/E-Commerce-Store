@@ -9,11 +9,13 @@ import Loader from "../components/Loader";
 import { toast, Toaster } from 'react-hot-toast';
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDeliverOrderMutation } from "../slices/ordersApiSlice";
 
 const OrderScreen = () => {
   const { orderId } = useParams();
   const { data, refetch, isLoading, error } = useGetOrderByIdQuery(orderId);
   const [payOrder, { isLoading: loadingPay }] = usePayOrderMutation();
+ const [ deliverOrder , { isLoading : loadingDeliver}] = useDeliverOrderMutation(orderId)
   const [{ isPending }, paypalDispatch] = usePayPalScriptReducer();
   const { userInfo } = useSelector((state) => state.auth);
   const { data: paypal, isLoading: loadingPayPal, error: errorPayPal } = useGetPaypalClientIdQuery();
@@ -35,7 +37,8 @@ const OrderScreen = () => {
     loadPayPalScript();
   }, [loadingPayPal, errorPayPal, paypal, paypalDispatch]);
 
-  async function onApproveTest() {
+  async function onApproveTest(e) {
+    e.preventDefault()
     try {
       await payOrder({ orderId, details: { id: orderId, updateTime: Date.now(), status: 'TestPay-Completed', emailAddress: userInfo.email } });
       refetch();
@@ -67,6 +70,19 @@ const OrderScreen = () => {
     toast.error(error.message);
   }
 
+
+  const onDeliverHandler = async(e) =>{
+    e.preventDefault()
+
+    try {
+      const res = await deliverOrder(orderId).unwrap() 
+      refetch()
+      toast.success('Order Delivered!')
+    } catch (error) {
+      toast.error(error.data.message)
+    }
+
+  }
   return (
     <>
       <Toaster />
@@ -153,9 +169,10 @@ const OrderScreen = () => {
                       <Col>${data.order.totalPrice}</Col>
                     </Row>
                   </ListGroupItem>
+
                   {isPending && loadingPay ? (
                     <Loader />
-                  ) : (
+                  ) : !data.order.isPaid ? (
                     <ListGroupItem>
                       <div>
                         <Button
@@ -178,7 +195,29 @@ const OrderScreen = () => {
                         {errorPayPal && <Message variant="danger">Failed to load PayPal SDK</Message>}
                       </div>
                     </ListGroupItem>
-                  )}
+                  ) : (<><Message>Order is Paid!</Message></>)}
+
+                  {loadingDeliver ? (<>
+                  <Loader></Loader>
+                  </>)  : (<></>)}
+
+
+                  {
+                    userInfo && userInfo.isAdmin && data.order.isPaid && !data.order.isDelivered ? (<>
+                    <ListGroupItem>
+                      <div style={{display :'flex' , justifyContent:'center' , alignItems : 'center'}}>
+                    <Button
+                          className="buttonn"
+                          onClick={onDeliverHandler}
+                          style={{ marginTop: "10px", marginBottom: "15px", color: 'black', border: '1px solid black', padding: '5px 20px' }}
+                        >
+                          Mark as Delivered
+                        </Button>
+                        </div>
+                    </ListGroupItem>
+                    </>) : (<></>)
+                  }
+
                 </ListGroup>
               </Card>
             </Col>

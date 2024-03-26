@@ -172,15 +172,10 @@ const ProfileScreen = () => {
                         )}
                       </td>
                       <td>
-                        <LinkContainer to={`/order/${order._id }`}>
+                        <LinkContainer  style={{color: 'black' , border : '1px solid black' ,padding: "3px 20px",}} to={`/order/${order._id }`}>
                           <Button
                             className="buttonn"
-                            style={{
-                              marginTop: "10px",
-                              color: "black",
-                              border: "1px solid black",
-                              padding: "5px 20px",
-                            }}
+                           
                           >
                   Details
 
