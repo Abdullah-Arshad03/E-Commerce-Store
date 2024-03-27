@@ -1,35 +1,57 @@
 import React from "react";
 import { useGetProductsQuery } from "../../slices/productApiSlice";
-import { FaTimes, FaEdit , FaTrash } from "react-icons/fa";
+import { FaTimes, FaEdit , FaTrash, FaTheRedYeti } from "react-icons/fa";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { Row ,Col , Button, Table} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import { useCreateProductMutation } from "../../slices/productApiSlice";
+import {toast, Toaster} from 'react-hot-toast'
+import {useNavigate} from 'react-router-dom'
 
 const ProductListScreen = () =>{
 
-
-    const {data , isLoading , error} = useGetProductsQuery()
+    const navigate = useNavigate()
+    const {data , refetch , isLoading , error} = useGetProductsQuery()
+    const [createProd , {isLoading : createProdLoading}] = useCreateProductMutation()
     console.log('these are the products: ',data )
 
     const onDeleteHandler = () =>{
         
     }
 
+     const createProductHandler = async()=> {
+        if(window.confirm('Are you sure you want to create new product?')){
+            try {
+                const res = await createProd()
+                refetch()
+    
+            } catch (error) {
+                toast.error(error)
+            }
+    
+        }
+     }
+
+    //  const updateProductHandler = ()=>{
+    //     navigate('/product/${}')
+        
+    //  }
     return(<>
     
 
-
+ <Toaster></Toaster>
        <Row className= "align-items-center">
         <Col>
             <h1>Products</h1>
         </Col>
         <Col className="text-end">
-            <Button className='m-3 btn-sm bg-black border-black'>
+            <Button onClick={createProductHandler} className='m-3 btn-sm bg-black border-black'>
                 <FaEdit></FaEdit> Create product 
             </Button>
         </Col>
        </Row>
+       {createProdLoading ? (<><Loader></Loader></>) : (<></>)}
 
 
        {isLoading ? (<>
