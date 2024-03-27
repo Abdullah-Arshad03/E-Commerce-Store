@@ -36,19 +36,13 @@ const UpdateProductScreen = () =>{
  const submitHandler = async(e) =>{
     e.preventDefault()
     try {
-     const res = await updateProd({prodId , data : {
-            name , 
-            price , 
-            image ,
-            brand ,
-            category , 
-            countInStock , 
-            description
-        } }).unwrap()
+     const res = await updateProd({prodId , name , price , brand , category ,countInStock , description}).unwrap()
 
-        console.log('the updated product ' , res)
-        navigate('/admin/productlist')
+        
         toast.success('Product is updated!')
+        refetch()
+        console.log(res)
+        navigate('/admin/productlist')
 
     } catch (error) {
         toast.error(error?.data?.message || error.error)
@@ -58,6 +52,8 @@ const UpdateProductScreen = () =>{
 
 
  useEffect(()=>{
+
+  if(Product && Product.product ){
     setName(Product.product.name)
     setPrice(Product.product.name)
     setImage(Product.product.image)
@@ -65,6 +61,7 @@ const UpdateProductScreen = () =>{
     setCategory(Product.product.category)
     setCountInStock(Product.product.countInStock)
     setDescription(Product.product.description)
+  }
 
 
 
@@ -80,7 +77,7 @@ const UpdateProductScreen = () =>{
     
     <h2>Update Product</h2>
 
-    {/* {updateLoading && <Loader/>} */}
+    {updateLoading && <Loader/>}
 
     {isLoading? (<><Loader></Loader></>) : error ? (<><Message variant='danger'>{error?.data?.message}</Message></>) : (<> <Form onSubmit={submitHandler}>
 

@@ -103,33 +103,61 @@ exports.updateProduct = async(req, res ,next)=>{
   const prodId = req.params.id
   console.log('this is id of the product which is going to be edit : ' , prodId)
 
-  try {
+  
+    // const {name , price , category , brand , countInStock , image , description , numReviews} = req.body
 
-    const {name , price , category , brand , countInStock , image , description , numReviews} = req.body
+    const updatedName = req.body.name
+    console.log('this is ',updatedName)
 
-    const product = await Product.findById(id)
+    const updatedPrice= req.body.price
+    console.log('this is updated price', updatedPrice)
 
-    if(!product){
-      errorFunc(404 , 'Product not found!')
-    }
-   
-      product.name = name ,
-      product.price = price,
-      product.category = category,
-      product.brand = brand ,
-      product.countInStock = countInStock,
-      product.image = image ,
-      product.description = description,
-      product.numReviews = numReviews
+    const updatedCategory = req.body.category
+    console.log('category',updatedCategory)
+
+    const updatedBrand = req.body.brand
+    console.log('brand',updatedBrand)
+
+    const updatedCountInStock = req.body.countInStock
+    console.log('count',updatedCountInStock)
+
+    const updatedDescription = req.body.description
+    console.log('desp',updatedDescription)
+
+    const updatedNumReviews = req.body.numReviews
+    console.log(updatedNumReviews)
+
+
+    try {
+
+    const product = await Product.findById(prodId)
+    console.log(product)
+
+    if(product){
       
+      product.name = updatedName ,
+      product.price = updatedPrice,
+      product.category = updatedCategory,
+      product.brand = updatedBrand ,
+      product.countInStock = updatedCountInStock,
+      // product.image = image ,
+      product.description = updatedDescription
+      // product.numReviews = updatedNumReviews
 
       const updatedProduct = await product.save()
+      console.log('updated : ' , updatedProduct)
 
       res.status(200).json({
         message : 'product is updated!',
         updatedProduct : updatedProduct
       })
 
+     
+    }
+    errorFunc(404 , 'Product not found!')
+      
+
+     
 
   } catch (error) {
     
