@@ -99,15 +99,15 @@ exports.createProduct = async(req, res , next) =>{
 }
 
 
-exports.updateProduct = async()=>{
-  const productId = req.params.id
-  console.log('this is id of the product which is going to be edit : ' , productId)
+exports.updateProduct = async(req, res ,next)=>{
+  const prodId = req.params.id
+  console.log('this is id of the product which is going to be edit : ' , prodId)
 
   try {
 
     const {name , price , category , brand , countInStock , image , description , numReviews} = req.body
 
-    const product = await Product.findById(productId)
+    const product = await Product.findById(id)
 
     if(!product){
       errorFunc(404 , 'Product not found!')
@@ -130,7 +130,7 @@ exports.updateProduct = async()=>{
         updatedProduct : updatedProduct
       })
 
-      
+
   } catch (error) {
     
   }
