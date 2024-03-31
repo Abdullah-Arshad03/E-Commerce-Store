@@ -13,7 +13,6 @@ export const apiSlice = createApi({
         }),
     tagTypes: ['Product', 'Order', 'User', 'Auth'],
     endpoints: (builder) => ({}),
-    
 
     // these above endpoints key, contain the actions for this slice and they will be extended in the separate file like actions for the product api are in the productApiSlice and likewise for all
     

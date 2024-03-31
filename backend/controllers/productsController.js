@@ -124,8 +124,8 @@ exports.updateProduct = async(req, res ,next)=>{
     const updatedDescription = req.body.description
     console.log('desp',updatedDescription)
 
-    const updatedNumReviews = req.body.numReviews
-    console.log(updatedNumReviews)
+    // const updatedNumReviews = req.body.numReviews
+    // console.log(updatedNumReviews)
 
 
     try {
@@ -133,33 +133,34 @@ exports.updateProduct = async(req, res ,next)=>{
     const product = await Product.findById(prodId)
     console.log(product)
 
-    if(product){
-      
-      product.name = updatedName ,
-      product.price = updatedPrice,
-      product.category = updatedCategory,
-      product.brand = updatedBrand ,
-      product.countInStock = updatedCountInStock,
-      // product.image = image ,
-      product.description = updatedDescription
-      // product.numReviews = updatedNumReviews
+    if(!product){
 
-      const updatedProduct = await product.save()
-      console.log('updated : ' , updatedProduct)
-
-      res.status(200).json({
-        message : 'product is updated!',
-        updatedProduct : updatedProduct
-      })
-
-     
+      errorFunc(404 , 'Product not found!')
     }
-    errorFunc(404 , 'Product not found!')
+         
+    product.name = updatedName ,
+    product.price = updatedPrice,
+    product.category = updatedCategory,
+    product.brand = updatedBrand ,
+    product.countInStock = updatedCountInStock,
+    // product.image = image ,
+    product.description = updatedDescription
+    // product.numReviews = updatedNumReviews
+
+    const updatedProduct = await product.save()
+    console.log('updated : ' , updatedProduct)
+
+    res.status(200).json({
+      message : 'product is updated!',
+      updatedProduct : updatedProduct
+    })
+
       
 
      
 
   } catch (error) {
+    catchError(error, next)
     
   }
 
