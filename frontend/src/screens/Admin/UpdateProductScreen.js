@@ -160,7 +160,7 @@ const UpdateProductScreen = () => {
                 alignItems: "center",
               }}
             >
-              {/* <Button
+              <Button
                 className="buttonn"
                 // variant="outlined"
                 type="submit"
@@ -173,7 +173,7 @@ const UpdateProductScreen = () => {
                 }}
               >
                 Update Product
-              </Button> */}
+              </Button>
             </div>
           </Form>
         )}
