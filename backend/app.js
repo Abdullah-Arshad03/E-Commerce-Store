@@ -1,3 +1,4 @@
+const path = require('path') // built in modules
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -10,6 +11,7 @@ const prodRoutes = require("./routes/productsRoutes");
 const authRoutes = require('./routes/authRoutes')
 const userRoutes = require('./routes/userRoutes')
 const orderRoutes = require('./routes/orderRoutes')
+const uploadRoutes  = require('./routes/uploadRoutes')
 
 
 // body parser middleware
@@ -20,7 +22,6 @@ app.use(express.urlencoded({extended: true}))
 app.use(cookieParser())
 
 // handling the cors errors
-
 app.use((req, res, next) => {
   const allowedOrigins = ['http://localhost:3000']; 
   const origin = req.headers.origin;
@@ -44,12 +45,14 @@ app.use("/api/products", prodRoutes);
 app.use('/api/auth', authRoutes);
 app.use('/api/users' , userRoutes);
 app.use('/api/orders', orderRoutes )
-
+app.use('/api/upload' , uploadRoutes)
 
 app.get('/api/config/paypal', (req, res) =>
    res.send({clientId : process.env.PAYPAL_CLIENT_ID})
 )
 
+// const __dirname = path.resolve() // set __dirname to current directory
+app.use('/uploads' , express.static(path.join(__dirname , '/uploads')))
 
 // error handling middleware 
 
