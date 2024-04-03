@@ -5,9 +5,9 @@ import { Button } from "@mui/material";
 import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import FormContainer from "../../components/FormContainer";
-import { toast } from "react-hot-toast";
+import { toast , Toaster } from "react-hot-toast";
 import { useState, useEffect } from "react";
-import { useUpdateProductMutation } from "../../slices/productApiSlice";
+import { useUpdateProductMutation , useUploadProductMutation} from "../../slices/productApiSlice";
 import { useGetProductDetailsQuery } from "../../slices/productApiSlice";
 
 const UpdateProductScreen = () => {
@@ -23,7 +23,7 @@ const UpdateProductScreen = () => {
 
   const [updateProd, { isLoading: updateLoading }] = useUpdateProductMutation();
   const navigate = useNavigate();
-
+   const [uploadProd , {isLoading : uploadLoading}] = useUploadProductMutation()
   const {
     data: Product,
     isLoading: productLoading,
@@ -50,6 +50,7 @@ const UpdateProductScreen = () => {
         prodId,
         name,
         price,
+        image,
         brand,
         category,
         countInStock,
@@ -64,8 +65,27 @@ const UpdateProductScreen = () => {
     }
   };
 
+  const uploadImageHandler = async(e) =>{
+    console.log(e.target.files[0])
+    const formData = new FormData()
+    formData.append('image' , e.target.files[0])
+
+    try {
+    const res = await uploadProd(formData).unwrap()
+    console.log('this is the response after successfull upload of the image', res)
+    setImage(res.image)
+    toast.success(res.message)
+
+    
+    } catch (error) {
+      toast.error(error.data.message)
+    }
+
+  }
+
   return (
     <>
+    <Toaster></Toaster>
       <Link to="/admin/productlist">
         <Button className="buttonn" variant="outlined">
           Go Back
@@ -111,6 +131,12 @@ const UpdateProductScreen = () => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></FormControl>
+              <FormControl 
+              type="file"
+              label="Choose a File"
+              onChange={uploadImageHandler}
+              >
+              </FormControl>
             </FormGroup>
 
             <FormGroup controlId="brand" className="my-3">

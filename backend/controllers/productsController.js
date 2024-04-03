@@ -112,6 +112,9 @@ exports.updateProduct = async(req, res ,next)=>{
     const updatedPrice= req.body.price
     console.log('this is updated price', updatedPrice)
 
+    const updatedImage = req.body.image
+    console.log('updated Image is: ', updatedImage)
+
     const updatedCategory = req.body.category
     console.log('category',updatedCategory)
 
@@ -140,6 +143,7 @@ exports.updateProduct = async(req, res ,next)=>{
          
     product.name = updatedName ,
     product.price = updatedPrice,
+    product.image = updatedImage
     product.category = updatedCategory,
     product.brand = updatedBrand ,
     product.countInStock = updatedCountInStock,

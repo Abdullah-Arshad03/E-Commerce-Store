@@ -52,7 +52,8 @@ app.get('/api/config/paypal', (req, res) =>
 )
 
 // const __dirname = path.resolve() // set __dirname to current directory
-app.use('/uploads' , express.static(path.join(__dirname , '/uploads')))
+
+app.use('/uploads' , express.static(path.join(__dirname , '..' , '/uploads')))
 
 // error handling middleware 
 
@@ -69,6 +70,8 @@ app.use((error,req,res,next)=>{
   })
 })
 
+
+
 const connection = async () => {
   try {
     // await mongoose.connect(process.env.MONGO_URI);
@@ -80,5 +83,6 @@ const connection = async () => {
 };
 
 connection();
+
 
 app.listen(port, ()=>console.log('server running!'))
