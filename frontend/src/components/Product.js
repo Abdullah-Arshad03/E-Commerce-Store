@@ -1,45 +1,31 @@
-import React from "react";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
-import Rating from "./Rating";
-
+import { Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import Rating from './Rating';
 
 const Product = ({ product }) => {
   return (
-    <>
-      <Card sx={{ maxWidth: 345  }} >
+    <Card className='my-3 p-3 rounded'>
+      <Link to={`/products/${product._id}`}>
+        <Card.Img src={`http://localhost:8000/${product.image}`} variant='top' />
+      </Link>
+
+      <Card.Body>
         <Link to={`/products/${product._id}`}>
-          <CardMedia
-            sx={{ height: 200 }}
-            image={product.image}
-            title="green iguana"
-          />
+          <Card.Title as='div' className='product-title'>
+            <strong  style={{ textDecorationLine: 'underline', color: 'black' }} className='text-dark '>{product.name}</strong>
+          </Card.Title>
         </Link>
-        <CardContent>
-          <Link to={`/products/${product._id}`} style={{textDecorationColor:'gray'}}>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="div"
-              color="text.secondary"
-              className="product-title"
-            >
-              {product.name}
-            </Typography>
-          </Link>
-          <Typography variant="h5" color="text.dark">
-            ${product.price}
-          </Typography>
-          <Typography variant="div" >
-           <Rating value={product.rating} text={product.numReviews}/>
-          </Typography>
-        </CardContent>
-      </Card>
-    </>
+
+        <Card.Text as='div'>
+          <Rating
+            value={product.rating}
+            text={`${product.numReviews} reviews`}
+          />
+        </Card.Text>
+
+        <Card.Text as='h3'>${product.price}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 

@@ -40,6 +40,7 @@ const ProductScreen = () => {
     dispatch(addToCart({...data.product , qty : Number(qty)  }))
     navigate('/cart')
   }
+  
 
   return (
     <>
@@ -65,7 +66,7 @@ const ProductScreen = () => {
           </Link>
           <Row className="mt-3">
             <Col md={5}>
-              <Image src={data.product.image} alt={data.product.name} fluid></Image>
+              <Image src={`http://localhost:8000/${data.product.image}`} alt={data.product.name} fluid></Image>
             </Col>
 
             <Col md={4}>

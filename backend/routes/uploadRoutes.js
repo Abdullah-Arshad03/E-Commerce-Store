@@ -7,10 +7,12 @@ const path = require ('path')
 
 const diskStorage = multer.diskStorage({
     destination : (req, file , cb) =>{
-        cb(null , `${path.join(__dirname , '../..' , '/uploads' )}`)
-    } ,
+        cb(null, './images');
+
+        // cb(null, path.join(__dirname, '../..', 'uploads'));
+    },
     filename  : (req, file , cb) =>{
-        cb(null , `${Date.now()}+${file.originalname}`  )
+        cb(null , `${Date.now()}${file.originalname}`  )
     }
 })
 
@@ -35,10 +37,10 @@ router.post('/' , upload.single('image') , (req, res)=>{
     console.log('this is the image file added ',req.file)
     res.status(200).json({
         message : 'image Uploaded',
-        image : `${req.file.path}` ,
-        file : `/${req.file}`
+        image: `${req.file.path}` 
+
 }
-    )
+   )
 })
 
 

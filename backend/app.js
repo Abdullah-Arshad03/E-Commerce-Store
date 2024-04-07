@@ -53,7 +53,7 @@ app.get('/api/config/paypal', (req, res) =>
 
 // const __dirname = path.resolve() // set __dirname to current directory
 
-app.use('/uploads' , express.static(path.join(__dirname , '..' , '/uploads')))
+app.use('/images' , express.static(path.join(__dirname , 'images')))
 
 // error handling middleware 
 

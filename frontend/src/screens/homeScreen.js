@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Container } from "react-bootstrap";
 import Product from "../components/Product.js";
@@ -13,6 +13,7 @@ const HomeScreen = () => {
   const { data , isLoading, error } = useGetProductsQuery();
 
 
+   
 
   return (
     <>
@@ -33,11 +34,14 @@ const HomeScreen = () => {
           <Message variant='danger'>{error?.data?.message || error.error}</Message>
         ) : (
           <>
+          
             <h1 style={{ color: "#2F4F4F" }}>Lastest Products:</h1>
 
             <Row>
               {data.
-              products.map((product) => (
+              products.map((product) => (<>
+             
+
                 <Col
                   sm={12}
                   md={6}
@@ -45,9 +49,9 @@ const HomeScreen = () => {
                   xl={3}
                   style={{ marginBottom: "20px" }}
                 >
-                  <Product product={product} />
+                  <Product product={product} image = {product.image}/>
                 </Col>
-              ))}
+              </>))}
             </Row>
           </>
         )}
