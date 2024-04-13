@@ -1,5 +1,5 @@
 import React from "react";
-import { useGetUsersQuery } from "../../slices/userApiSlice";
+import { useGetUsersQuery , useDeleteUserMutation } from "../../slices/userApiSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
@@ -12,9 +12,14 @@ import { Button } from "@mui/material";
 const UserListScreen = () => {
   const { data , refetch , isLoading, error } = useGetUsersQuery();
   console.log(" this is the fetch orderlist", data);
+  const [deleteUser , {isLoading : deleteUserLoading}] = useDeleteUserMutation()
 
-  const deleteHandler = async()=>{
+  const deleteHandler = async(id)=>{
+    if (window.confirm('Are you sure, you want to delete the user')){
+        const res = deleteUser(id)
 
+
+    }
   }
   return (
     <>
@@ -82,7 +87,7 @@ const UserListScreen = () => {
                   </td>
                   <td>
                   <Button onClick={()=>{
-                    // deleteHandler(product._id)
+                    deleteHandler(user._id)
                 }} variant="light" style={{ border : '1px solid black' , marginBottom : '5px' }} >
                     <FaTrash style={{color : 'black' }} ></FaTrash>
                 </Button>
