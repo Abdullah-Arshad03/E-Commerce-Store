@@ -95,7 +95,7 @@ exports.getUserById = async(req, res , next) =>{
     try {
         const userId = req.params.id
 
-        const user = User.findOne({_id : userId})
+        const user =await User.findOne({_id : userId})
         console.log('this is the user found by the id : ', user)
 
         if(!user){
@@ -104,6 +104,7 @@ exports.getUserById = async(req, res , next) =>{
         
        res.status(200).json({
         message : 'user found by the id : ' , 
+        user : user
 
        })
     } catch (error) {
@@ -120,7 +121,9 @@ exports.deleteUser = async(req, res , next) =>{
 try {
 
      const userId = req.params.id
-     const user = User.findById(userId)
+     console.log(userId)
+     const user = await User.findById(userId)
+     
 
      if(!user){
         errorFunc(404 ,'user not found')
@@ -128,9 +131,13 @@ try {
      if(user.isAdmin){
         errorFunc(400 ,  'Cannot Delete Admin User!') // status 400 is the client error
      }
-    const deleted = await User.deleteOne({_id : user._id})
+  const deleted = await User.deleteOne({_id : user._id})
 
-    console.log('user is deleted: ', deleted)
+    // console.log('user is deleted: ', deleted)
+    res.status(200).json({
+        message : 'user deleted!',
+        deleted : deleted
+    })
 
 } catch (error) {
     catchError(error, next)
@@ -147,7 +154,7 @@ exports.updateUser = async (req, res , next) =>{
 
     try {
 
-        const user = await findById(req.params.id)
+        const user = await User.findById(req.params.id)
 
         if(!user){
             errorFunc(404 , 'User not Found!')

@@ -6,6 +6,7 @@ import Message from "../../components/Message";
 import { Table } from "react-bootstrap";
 import { FaTimes  , FaTrash , FaEdit , FaCheck } from "react-icons/fa";
 import { LinkContainer } from "react-router-bootstrap";
+import {toast ,Toaster} from "react-hot-toast";
 
 import { Button } from "@mui/material";
 
@@ -15,15 +16,28 @@ const UserListScreen = () => {
   const [deleteUser , {isLoading : deleteUserLoading}] = useDeleteUserMutation()
 
   const deleteHandler = async(id)=>{
+
     if (window.confirm('Are you sure, you want to delete the user')){
-        const res = deleteUser(id)
-
-
+       
+    try {
+        console.log(id)
+        const res = await deleteUser(id).unwrap()
+        refetch()
+        console.log(res)
+        
+    } catch (error) {
+        toast.error(error?.data?.message || error.error)   
     }
+
+}
+
+   
   }
   return (
     <>
+    <Toaster></Toaster>
       <h2 style={{marginBottom:'25px'}}>Users</h2>
+      {deleteUserLoading? (<><Loader/></>):(<></>)}
       {isLoading ? (
         <>
           <Loader></Loader>
@@ -40,7 +54,7 @@ const UserListScreen = () => {
         <Table stripped bordered hover responsive className="table-sm">
           <thead>
             <tr>
-              <th>Order ID</th>
+              <th>USER ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
               <th>ADMIN</th>
