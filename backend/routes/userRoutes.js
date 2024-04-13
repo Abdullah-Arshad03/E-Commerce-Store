@@ -8,7 +8,7 @@ router.put('/profile', protectRoute , userController.updateUserProfile)
 router.get('/' , protectRoute, admin, userController.getUsers)
 router.put('/:id', protectRoute, admin ,userController.updateUser)
 router.get('/:id', protectRoute, admin ,userController.getUserById)
-router.delete('/:id',protectRoute, admin, userController.deleteUser)
+router.delete('/delete/:id',protectRoute, admin, userController.deleteUser)
 
 
 module.exports = router

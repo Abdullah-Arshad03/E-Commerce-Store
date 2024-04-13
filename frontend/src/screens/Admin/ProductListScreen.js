@@ -7,7 +7,8 @@ import { Row ,Col , Button, Table} from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { useCreateProductMutation } from "../../slices/productApiSlice";
 import {toast, Toaster} from 'react-hot-toast'
-import {useNavigate} from 'react-router-dom'
+import {useLoaderData, useNavigate} from 'react-router-dom'
+import { useDeleteProductMutation } from "../../slices/productApiSlice";
 
 const ProductListScreen = () =>{
 
@@ -16,9 +17,24 @@ const ProductListScreen = () =>{
     const [createProd , {isLoading : createProdLoading}] = useCreateProductMutation()
     console.log('these are the products: ',data )
 
-    const onDeleteHandler = () =>{
-        
+    const [deleteProd , {isLoading : deleteLoading}] = useDeleteProductMutation()
+
+
+    const onDeleteHandler = async(id) =>{
+        if(window.confirm('Are You Sure, You Want To Delete')) {
+
+        try {
+            console.log('this is the id', id)
+           const res = await deleteProd(id)
+           refetch()
+            console.log('deleted : ', res)
+            navigate('/')
+        } catch (error) {
+            toast.error(error?.data?.message || error.error)
+        }
     }
+    }
+    
 
      const createProductHandler = async()=> {
         if(window.confirm('Are you sure you want to create new product?')){
@@ -51,8 +67,9 @@ const ProductListScreen = () =>{
             </Button>
         </Col>
        </Row>
-       {createProdLoading ? (<><Loader></Loader></>) : (<></>)}
 
+       {createProdLoading ? (<><Loader></Loader></>) : (<></>)}
+      {deleteLoading? (<><Loader></Loader></>) : (<></>)}
 
        {isLoading ? (<>
      <Loader></Loader>
@@ -87,7 +104,9 @@ const ProductListScreen = () =>{
                         <FaEdit></FaEdit>
                     </Button>
                 </LinkContainer>
-                <Button onClick={onDeleteHandler} variant="light" style={{ border : '1px solid black' , marginBottom : '5px' }} >
+                <Button onClick={()=>{
+                    onDeleteHandler(product._id)
+                }} variant="light" style={{ border : '1px solid black' , marginBottom : '5px' }} >
                     <FaTrash style={{color : 'black' }} ></FaTrash>
                 </Button>
             </tr>

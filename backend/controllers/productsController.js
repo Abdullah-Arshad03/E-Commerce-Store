@@ -158,14 +158,31 @@ exports.updateProduct = async(req, res ,next)=>{
       message : 'product is updated!',
       updatedProduct : updatedProduct
     })
-
-      
-
-     
-
   } catch (error) {
     catchError(error, next)
     
   }
 
 }
+
+exports.deleteProduct = async (req, res, next) => {
+  console.log('in delete');
+  try {
+    const id = req.params.id;
+    console.log('id of deleted product', id);
+    const prod = await Product.findByIdAndDelete(id);
+
+    if (!prod) {
+      errorFunc(404, 'Product not found');
+    }
+
+    console.log('product is removeddd!!! ', prod);
+
+    res.status(200).json({
+      message: 'product deleted'
+    });
+  } catch (error) {
+    catchError(error, next);
+  }
+};
+
