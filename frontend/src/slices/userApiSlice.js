@@ -10,11 +10,42 @@ const userApiSlice = apiSlice.injectEndpoints({
                 url : `${USERS_URL}/profile`,
                 method : 'PUT',
                 body : {...data} 
-            })//sdf
+            })
         }),
+
+        getUsers : builder.query({
+            query : ()=>({
+                url : USERS_URL,
+                method : 'GET'
+            })
+        }),
+        getUserDetails : builder.query({
+            query : (id)=>({
+                url : `${USERS_URL}/${id}`,
+                method : 'GET'
+            })
+        }),
+        updateUserDetail : builder.mutation({
+            query : (id)=>({
+                url : `${USERS_URL}/${id}`,
+                method : 'PUT'
+            })
+        }),
+
+
+        deleteUser : builder.mutation({
+            query : (id)=>({
+                url : `${USERS_URL}/delete/${id}`,
+                method : "DELETE"
+            })
+        })
+
+
+
+
 
     })
 })
 
 export {userApiSlice}
-export const {useUserProfileMutation } = userApiSlice
+export const {useUserProfileMutation ,useGetUsersQuery , useGetUserDetailsQuery , useUpdateUserDetailMutation, useDeleteUserMutation } = userApiSlice

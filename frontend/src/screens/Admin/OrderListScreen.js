@@ -37,6 +37,7 @@ const OrderListScreen = () => {
                 <th>TOTAL</th>
                 <th>PAID</th>
                 <th>DELIVERED</th>
+                <th></th>
               </tr>
             </thead>
             {data.orders.map((order) => (

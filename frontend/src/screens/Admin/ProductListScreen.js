@@ -87,6 +87,8 @@ const ProductListScreen = () =>{
                 <th>PRICE</th>
                 <th>CATEGORY</th>
                 <th>BRAND</th>
+                <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -99,16 +101,20 @@ const ProductListScreen = () =>{
                 <td>{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
-                <LinkContainer to={`/admin/product/${product._id}/edit`}>
+
+               <td> <LinkContainer to={`/admin/product/${product._id}/edit`}>
                     <Button variant="light" className="btn-sm mx-2">
                         <FaEdit></FaEdit>
                     </Button>
                 </LinkContainer>
+                </td>
+                <td>
                 <Button onClick={()=>{
                     onDeleteHandler(product._id)
                 }} variant="light" style={{ border : '1px solid black' , marginBottom : '5px' }} >
                     <FaTrash style={{color : 'black' }} ></FaTrash>
                 </Button>
+                </td>
             </tr>
 
             </>))

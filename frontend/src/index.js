@@ -24,6 +24,7 @@ import AdminRoute from './components/AdminRoute';
 import OrderListScreen from './screens/Admin/OrderListScreen';
 import ProductListScreen from './screens/Admin/ProductListScreen';
 import UpdateProductScreen from './screens/Admin/UpdateProductScreen';
+import UserListScreen from './screens/Admin/UserListScreen';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -40,6 +41,7 @@ const router = createBrowserRouter(
 // following are the Private Routes
 
      <Route path='' element={<PrivateRoute></PrivateRoute>}>
+
      <Route path='/shipping' element={<ShippingScreen/>}/> 
      <Route path='/payment' element={<PaymentScreen/>}/> 
      <Route path='/placeorder' element = {<PlaceOrderScreen/>}></Route>
@@ -49,12 +51,14 @@ const router = createBrowserRouter(
 
     </Route >
 
-
+// admin routes
     <Route path='' element={<AdminRoute></AdminRoute>}>
 
       <Route path ='/admin/orderlist' element={<OrderListScreen></OrderListScreen>}></Route>
       <Route path ='/admin/productlist' element={<ProductListScreen></ProductListScreen>}></Route>
       <Route path ='/admin/product/:id/edit' element={<UpdateProductScreen></UpdateProductScreen>}></Route>
+      <Route path ='/admin/userlist' element={<UserListScreen/>}></Route>
+
 
 
     </Route>
