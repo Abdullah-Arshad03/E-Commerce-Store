@@ -28,7 +28,6 @@ const checkFileType = (req , file , cb) =>{
         // the first argument in the cb is the error and if there is no mimetype and extname, we return a call back with Images only.
     }
 } 
-
 const upload = multer ({storage : diskStorage })
 
 router.post('/' , upload.single('image') , (req, res)=>{

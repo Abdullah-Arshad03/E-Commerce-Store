@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.30685ac1.css",
+    "main.js": "/static/js/main.48f40056.js",
+    "static/js/592.bf6ca574.chunk.js": "/static/js/592.bf6ca574.chunk.js",
+    "static/media/canon.png": "/static/media/canon.2baf943c2e861378b472.png",
+    "static/media/iphone11.png": "/static/media/iphone11.6511065744e40b55a240.png",
+    "static/media/logo6.png": "/static/media/logo6.4e71a3f8e8d547e6cf00.png",
+    "static/media/airpods.png": "/static/media/airpods.6260f3428b63b48bc5be.png",
+    "index.html": "/index.html",
+    "main.30685ac1.css.map": "/static/css/main.30685ac1.css.map",
+    "main.48f40056.js.map": "/static/js/main.48f40056.js.map",
+    "592.bf6ca574.chunk.js.map": "/static/js/592.bf6ca574.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.30685ac1.css",
+    "static/js/main.48f40056.js"
+  ]
+}

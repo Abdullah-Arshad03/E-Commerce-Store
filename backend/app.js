@@ -55,6 +55,22 @@ app.get('/api/config/paypal', (req, res) =>
 
 app.use('/images' , express.static(path.join(__dirname , 'images')))
 
+
+if (process.env.NODE_ENV === 'production'){
+
+  // set static folder
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  // Other routes and middleware can be defined here
+  
+  // This route serves the index.html file for any other route
+  app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
+}
+
+
 // error handling middleware 
 
 app.use((error,req,res,next)=>{
@@ -74,8 +90,8 @@ app.use((error,req,res,next)=>{
 
 const connection = async () => {
   try {
-    // await mongoose.connect(process.env.MONGO_URI);
-  await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
+    await mongoose.connect(process.env.MONGO_URI);
+  // await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
     console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");
