@@ -185,4 +185,51 @@ exports.deleteProduct = async (req, res, next) => {
     catchError(error, next);
   }
 };
+ 
 
+// /api/products/:id/reviews
+exports.createProductReview = async (req,res,next)=>{
+  try {
+      const {comment , rating} = req.body
+      const prodId = req.params.id
+      const product = await Product.findById(prodId)
+
+      if(!product){
+        errorFunc(404 , 'Product not found')
+      }
+      
+      const alreadyReviewed = product.reviews.find((review)=> review.user.toString()=== req.user._id.toString())
+
+      if(alreadyReviewed){
+        errorFunc(400 , 'Product Already Reviewed!') // 400 is the client side 
+      }
+
+      const review = {
+        name : req.user.name ,
+        rating : Number(rating) ,
+        comment ,
+        user : req.user._id
+      }
+      // we created the reviews object now we have to push this in the reviews array present in the product object
+
+      product.reviews.push(review)
+      product.numReviews = product.reviews.length
+
+      product.rating = product.reviews.reduce((acc,review)=> acc + review.rating, 0) / product.reviews.length
+
+
+     const prodSaved =  await product.save()
+
+      console.log(prodSaved)
+
+      res.status(201).json({
+        message : 'Review added'
+      })
+
+
+
+  } catch (error) {
+    catchError(error, next)
+  }
+
+}
