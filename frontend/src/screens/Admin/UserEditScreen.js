@@ -48,23 +48,7 @@ const UserEditScreen = () => {
     }
   };
 
-//   const uploadImageHandler = async(e) =>{
-//     console.log(e.target.files[0])
-//     const formData = new FormData()
-//     formData.append('image' , e.target.files[0])
 
-//     try {
-//     const res = await uploadProd(formData).unwrap()
-//     console.log('this is the response after successfull upload of the image', res)
-//     setImage(res.image)
-//     toast.success(res.message)
-
-    
-//     } catch (error) {
-//       toast.error(error.data.message)
-//     }
-
-//   }
 
   return (
     <>
