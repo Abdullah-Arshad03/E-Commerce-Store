@@ -240,3 +240,17 @@ exports.createProductReview = async (req,res,next)=>{
   }
 
 }
+
+exports.topThreeProds = async (req,res ,next) =>{
+  try {
+
+    const products = await Product.find().sort({rating : -1}).limit(3)
+  res.status(200).json({
+    message : 'got top products',
+    prods : products
+  })
+    
+  } catch (error) {
+    catchError(error,next)
+  }
+}

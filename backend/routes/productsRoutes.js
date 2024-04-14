@@ -5,6 +5,7 @@ const router = express.Router()
 const productController = require('../controllers/productsController')
 
 router.get('/'  ,productController.getProducts )
+router.get ('/top' , productController.topThreeProds)
 router.get('/:id' , productController.getProduct)
 router.post('/createproduct',protectRoute, admin , productController.createProduct)
 router.put ('/product/:id', protectRoute, admin, productController.updateProduct)

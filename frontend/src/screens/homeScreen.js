@@ -7,7 +7,7 @@ import Message from "../components/Message.js";
 import Loader from "../components/Loader.js";
 import { useParams } from "react-router-dom";
 import Paginate from "../components/Paginate.js";
-
+import ProductCarousel from "../components/ProductCarousel.js";
 const HomeScreen = () => {
 
   const {pageNumber} = useParams()
@@ -22,7 +22,7 @@ const HomeScreen = () => {
 
   return (
     <>
-    
+    <ProductCarousel></ProductCarousel>
       <Container>
         {isLoading ? (
           <>
