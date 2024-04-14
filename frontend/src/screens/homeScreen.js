@@ -5,12 +5,17 @@ import Product from "../components/Product.js";
 import { useGetProductsQuery } from "../slices/productApiSlice.js";
 import Message from "../components/Message.js";
 import Loader from "../components/Loader.js";
+import { useParams } from "react-router-dom";
+import Paginate from "../components/Paginate.js";
 
 const HomeScreen = () => {
 
-  
+  const {pageNumber} = useParams()
+  console.log('here is the pageNumber',pageNumber)
 
-  const { data , isLoading, error } = useGetProductsQuery();
+  const { data , isLoading, error } = useGetProductsQuery({pageNumber});
+
+  console.log('here is the data',data)
 
 
    
@@ -53,6 +58,7 @@ const HomeScreen = () => {
                 </Col>
               </>))}
             </Row>
+            <Paginate page={data.page} pages={data.pages}></Paginate>
           </>
         )}
       </Container>

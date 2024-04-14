@@ -1,7 +1,7 @@
 import React from "react";
 import {Badge ,Navbar , Container , Nav, NavbarBrand, NavbarToggle, NavbarCollapse, NavDropdown} from 'react-bootstrap'
 import {  FaShoppingCart , FaUser} from 'react-icons/fa'
-import logo from '../assets/styles/logo.png'
+import logo6 from '../assets/styles/logo6.png'
 import {LinkContainer} from 'react-router-bootstrap'
 import { useSelector, useDispatch } from "react-redux";
 import { useLogoutMutation } from "../slices/authApiSlice";
@@ -48,8 +48,8 @@ const Header = () =>{
         <Container>
             <LinkContainer to='/'>
             <Navbar.Brand >
-                <span><img src={logo} alt="E-ProStore" /></span>
-                E-ProStore</Navbar.Brand>
+                <span><img width='95px' src={logo6} alt="E-ProStore" /></span>
+               </Navbar.Brand>
                 </LinkContainer>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />

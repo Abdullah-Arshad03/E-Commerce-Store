@@ -8,7 +8,12 @@ exports.getProducts = async(req, res, next) => {
 
   try {
 
-   const products = await Product.find()
+    const itemsOnPage = 4 
+    const page = req.query.pageNumber || 1
+    const count = await Product.countDocuments()
+
+   const products = await Product.find().skip(itemsOnPage * (page - 1)).limit(itemsOnPage)
+
 
    if(!products){
     const error = new Error('No Products Found!')
@@ -18,7 +23,9 @@ exports.getProducts = async(req, res, next) => {
 
    res.status(200).json({
     message : 'all products are fetched',
-    products : products
+    products : products ,
+    page : page, 
+    pages : Math.ceil(count/itemsOnPage)
 
    })
 
@@ -69,12 +76,12 @@ exports.createProduct = async(req, res , next) =>{
   try {
     
   const product = new Product({
-    name : 'sample name' ,
+    name : 'Add Name' ,
     user : req.user._id,
-    category : 'sample category',
+    category : 'Add Category',
     image : '/images/sample.jgp',
-    description : 'sample description',
-    brand : 'sample brand',
+    description : 'Add Description',
+    brand : 'Place your Brand',
     price : 0,
     countInStock : 0,
     numReviews : 0,

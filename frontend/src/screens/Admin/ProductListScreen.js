@@ -9,11 +9,15 @@ import { useCreateProductMutation } from "../../slices/productApiSlice";
 import {toast, Toaster} from 'react-hot-toast'
 import {useLoaderData, useNavigate} from 'react-router-dom'
 import { useDeleteProductMutation } from "../../slices/productApiSlice";
+import { useParams } from "react-router-dom";
+import Paginate from "../../components/Paginate";
+
 
 const ProductListScreen = () =>{
 
+    const {pageNumber} = useParams()
     const navigate = useNavigate()
-    const {data , refetch , isLoading , error} = useGetProductsQuery()
+    const {data , refetch , isLoading , error} = useGetProductsQuery({pageNumber})
     const [createProd , {isLoading : createProdLoading}] = useCreateProductMutation()
     console.log('these are the products: ',data )
 
@@ -123,6 +127,7 @@ const ProductListScreen = () =>{
 
 
      </Table>
+     <Paginate page={data.page} pages={data.pages} isAdmin={true}></Paginate>
 
 
 

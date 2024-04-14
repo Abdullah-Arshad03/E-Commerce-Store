@@ -56,7 +56,7 @@ const Rating = ({ value, text }) => {
           )}
         </span>
         
-        <span className="rating-text">({text ? (<>{text}<span>reviews</span></>) : (<><p>no rating</p></>)})</span>
+        <span className='rating-text'>{text && text}</span>
       </div>
    
     </>
