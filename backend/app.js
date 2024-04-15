@@ -27,14 +27,14 @@ app.use(cookieParser())
 
 // handling the cors errors
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000']; 
+  const allowedOrigins = ['http://localhost:3000', 'https://e-commerce-store-1h41.onrender.com']; // Add your frontend URL here
   const origin = req.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
 
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH , DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
 
@@ -94,10 +94,11 @@ app.use((error,req,res,next)=>{
 
 
 
+// await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
 const connection = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-  // await mongoose.connect('mongodb://127.0.0.1:27017/e-commerce-store')
+    console.log(process.env.MONGO_URI)
     console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");
