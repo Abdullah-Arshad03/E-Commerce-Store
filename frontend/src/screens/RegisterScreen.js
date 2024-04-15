@@ -27,7 +27,7 @@ const RegisterScreen = () => {
   const {userInfo} = useSelector((state)=> state.auth)
   const dispatch = useDispatch()
 
-  const [register , {isLoading , error}] = useRegisterMutation()
+  const [register , {isLoading }] = useRegisterMutation()
   
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

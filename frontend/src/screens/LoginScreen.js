@@ -28,7 +28,7 @@ const LoginScreen = () => {
   const {userInfo} = useSelector((state)=> state.auth)
   const dispatch = useDispatch()
 
-  const [login , {isLoading , error}] = useLoginMutation()
+  const [login , {isLoading }] = useLoginMutation()
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
