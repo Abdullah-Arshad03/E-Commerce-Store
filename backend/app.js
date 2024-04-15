@@ -3,6 +3,10 @@ const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser')
+const envPath = path.join(__dirname, '../.env'); // Adjust the path as needed
+
+// Load the environment variables from the .env file
+dotenv.config({ path: envPath });
 dotenv.config();
 
 const app = express();
