@@ -63,15 +63,17 @@ app.use('/images' , express.static(path.join(__dirname , 'images')))
 if (process.env.NODE_ENV === 'production'){
 
   // set static folder
-  app.use(express.static(path.join(__dirname, 'build')));
+  app.use(express.static(path.join(__dirname, '..' , '/frontend/build')));
 
   // Other routes and middleware can be defined here
   
   // This route serves the index.html file for any other route
   app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, 'build', 'index.html'));
+      res.sendFile(path.resolve(__dirname, '..',  'frontend' , 'build' , 'index.html'));
   });
 
+}else{
+  app.listen(port, ()=>console.log('server running!'))
 }
 
 
