@@ -44,7 +44,22 @@ exports.getProducts = async(req, res, next) => {
 };
 
 exports.getProduct = async(req, res, next) => {
+
   const prodId = req.params.id
+
+
+  console.log('Request Headers:', req.headers);
+
+  // Check if the 'cookie' header exists
+  if (req.headers.cookie) {
+    console.log('Cookie header exists. Cookies:', req.headers.cookie);
+    // Parse the cookie header to see individual cookies
+    const cookies = req.headers.cookie.split(';').map(cookie => cookie.trim());
+    console.log('Individual Cookies:', cookies);
+    // You can further process individual cookies if needed
+  } else {
+    console.log('No cookie header found in the request.');
+  }
 
   try {
     

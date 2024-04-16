@@ -27,14 +27,15 @@ app.use(cookieParser())
 
 // handling the cors errors
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000', 'https://e-commerce-store-1h41.onrender.com']; // Add your frontend URL here
+  const allowedOrigins = ['http://localhost:3000' , '*']; 
   const origin = req.headers.origin;
 
   if (allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
+  // res.setHeader('Access-Control-Allow-Origin', '*');
 
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH , DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
 
@@ -60,21 +61,21 @@ app.get('/api/config/paypal', (req, res) =>
 app.use('/images' , express.static(path.join(__dirname , 'images')))
 
 
-if (process.env.NODE_ENV === 'production'){
+// if (process.env.NODE_ENV === 'production'){
 
-  // set static folder
-  app.use(express.static(path.join(__dirname, '..' , '/frontend/build')));
+//   // set static folder
+//   app.use(express.static(path.join(__dirname, '..' , '/frontend/build')));
 
-  // Other routes and middleware can be defined here
+//   // Other routes and middleware can be defined here
   
-  // This route serves the index.html file for any other route
-  app.get('*', (req, res) => {
-      res.sendFile(path.resolve(__dirname, '..',  'frontend' , 'build' , 'index.html'));
-  });
+//   // This route serves the index.html file for any other route
+//   app.get('*', (req, res) => {
+//       res.sendFile(path.resolve(__dirname, '..',  'frontend' , 'build' , 'index.html'));
+//   });
 
-}else{
-  app.listen(port, ()=>console.log('server running!'))
-}
+// }else{
+//   app.listen(port, ()=>console.log('server running!'))
+// }
 
 
 // error handling middleware 
@@ -98,7 +99,7 @@ app.use((error,req,res,next)=>{
 const connection = async () => {
   try {
     await mongoose.connect(process.env.MONGO_URI);
-    console.log(process.env.MONGO_URI)
+    // console.log(process.env)
     console.log("Mongoose! connected ");
   } catch (err) {
     console.log("Mongoose aint connected!");
