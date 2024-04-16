@@ -108,5 +108,5 @@ const connection = async () => {
 
 connection();
 
-
+console.log('done')
 app.listen(port, ()=>console.log('server running!'))
