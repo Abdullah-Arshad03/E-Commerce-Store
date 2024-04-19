@@ -9,8 +9,8 @@ export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
          baseUrl: VERCEL_URL,
-        //  mode : 'no-cors',
-         credentials:'include' // this credentials will send cookie with each request 
+         mode : 'no-cors',
+        //  credentials:'include' // this credentials will send cookie with each request 
         }),
     tagTypes: ['Product', 'Order', 'User', 'Auth'],
     endpoints: (builder) => ({}),
