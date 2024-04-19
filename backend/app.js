@@ -24,7 +24,7 @@ app.use(cookieParser())
 
 // handling the cors errors
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000/']; 
+  const allowedOrigins = ['*']; 
   const origin = req.headers.origin;
 
   if (!allowedOrigins.includes(origin)) {
