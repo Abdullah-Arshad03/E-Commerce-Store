@@ -24,10 +24,10 @@ app.use(cookieParser())
 
 // handling the cors errors
 app.use((req, res, next) => {
-  const allowedOrigins = ['https://e-commerce-store-3reo.vercel.app/']; 
+  const allowedOrigins = ['http://localhost:3000/']; 
   const origin = req.headers.origin;
 
-  if (allowedOrigins.includes(origin)) {
+  if (!allowedOrigins.includes(origin)) {
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   // res.setHeader('Access-Control-Allow-Origin', '*');
