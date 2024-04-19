@@ -24,15 +24,14 @@ app.use(cookieParser())
 
 // handling the cors errors
 app.use((req, res, next) => {
-  const allowedOrigins = ['http://localhost:3000']; 
+  const allowedOrigins = ['https://e-commerce-store-p171.vercel.app']; // Update allowed origin
   const origin = req.headers.origin;
 
-  if (origin && !allowedOrigins.includes(origin)) {
+  if (origin && allowedOrigins.includes(origin)) { // Check if origin is allowed
     res.setHeader('Access-Control-Allow-Origin', origin);
-    res.setHeader('Access-Control-Allow-Credentials', 'true');
   }
 
-  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH , DELETE');
+  res.setHeader('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PUT, PATCH, DELETE');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
@@ -41,6 +40,7 @@ app.use((req, res, next) => {
 
   next();
 });
+
 
 
 app.use("/api/products", prodRoutes);
