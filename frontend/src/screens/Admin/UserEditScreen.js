@@ -123,7 +123,7 @@ const UserEditScreen = () => {
                   padding: "5px 20px",
                 }}
               >
-                Update Product
+                Update User
               </Button>
             </div>
           </Form>

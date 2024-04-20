@@ -1,6 +1,6 @@
 import {createApi , fetchBaseQuery} from '@reduxjs/toolkit/query/react'
 
-import { VERCEL_URL } from '../constants'
+import { BASE_URL } from '../constants'
 
 // const baseUrl = fetchBaseQuery({baseUrl : BASE_URL})
 // console.log(baseUrl)
@@ -8,9 +8,8 @@ import { VERCEL_URL } from '../constants'
 export const apiSlice = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-         baseUrl: VERCEL_URL,
-         mode : 'no-cors',
-        //  credentials:'include' // this credentials will send cookie with each request 
+         baseUrl: BASE_URL,
+         credentials:'include' // this credentials will send cookie with each request 
         }),
     tagTypes: ['Product', 'Order', 'User', 'Auth'],
     endpoints: (builder) => ({}),
